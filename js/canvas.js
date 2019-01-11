@@ -1,7 +1,7 @@
 
 var canvas = document.querySelector('canvas');
-var width = canvas.width = window.innerWidth;
-var height = canvas.height = window.innerHeight;
+var width = canvas.width = 600;
+var height = canvas.height = 600;
 
 var handle = {
 	x: 100,
@@ -37,9 +37,6 @@ var rect = new Rectangle(handle.x,handle.y,handle.w,handle.h);
 rect.draw();
 
 function onMouseMove(event){
-	
-	console.log(event.clientX);
-	console.log(event.clientY);
 	handle.x = event.clientX;
 	handle.y = event.clientY;
 	rect.update(handle.x, handle.y);
@@ -55,13 +52,11 @@ function pointInRect(x, y, rect){
 }
 
 function inRange(value, min, max){
-	return value >= min && value <= max;
+	return value >= Math.min(min, max) && value <= Math.max(min, max);
 }
 
 document.body.addEventListener('mousedown', function(event){
 	if(pointInRect(event.clientX, event.clientY, handle)){
-		console.log(event.clientX);
-		console.log(event.clientY);
 		document.body.addEventListener('mousemove', onMouseMove);
 		document.body.addEventListener('mouseup', onMouseUp);
 	}

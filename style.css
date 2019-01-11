@@ -3,6 +3,13 @@
 body{
 	margin 0;
 }
-canvas{
+
+.draggable {
+  cursor: move;
+}
+
+svg{
+	width: 500px;
+	height: 500px;
 	border: 1px solid black;
 }
