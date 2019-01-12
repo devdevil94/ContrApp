@@ -8,7 +8,13 @@
 
 <body>
 	<svg onload="makeDraggable(event)">
-		<rect class="draggable" x="80" y="50" width="80" height="50" fill="#007bff"/>
+		<g class="draggable comp-group">
+			<rect x="80" y="50" width="80" height="50" fill="#007bff"/>
+			<text x="80" y="78" fill="red">Hello World</text>
+		</g>
+
+		<rect class="draggable" x="120" y="90" width="80" height="50" fill="#red"/>
+		
 	</svg>
 
 	
