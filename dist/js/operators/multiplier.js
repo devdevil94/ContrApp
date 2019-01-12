@@ -4,7 +4,7 @@ import InOutCircle from '../input-output-circle';
 //const Algebrite = require('algebrite');
 const cq = require('coffeequate');
 
-class Multiplier{
+export default class Multiplier{
 	
 	constructor(x,y){
 		this.x = x; this.y = y;
@@ -14,7 +14,8 @@ class Multiplier{
 		this.output = '';
 	}
 	create(){
-		
+		var shape = new MultiplierShape(this.x, this.y, constants.MULTIPLIER_SQUARE_SIDE);
+		shape.draw(svg);
 	}
 	setInput1(input1){
 		var input1Exp = input1.replace(/\^/g, '**');
@@ -128,5 +129,3 @@ class MultiplierShape{
 	setDragging(dragging){this.dragging = dragging;}
 	getDragging(){return this.dragging;}
 };
-
-export {Multiplier, MultiplierShape};
