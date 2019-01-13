@@ -1,14 +1,9 @@
 
-	import Rectangle from 'rectangle-class.js';
+
+var svg = document.querySelector('svg');
 
 
+var selectedElement = false;
 
-	var svg = document.querySelector('svg');
-
-	svg.addEventListener('mousedown', startDrag);
-	svg.addEventListener('mousemove', drag);
-	svg.addEventListener('mouseup', endDrag);
-	svg.addEventListener('mouseleave', endDrag);
-
-	var selectedElement = false;
-
+var rect = new Rectangle(80,50,100,100);
+rect.create(svg);

@@ -9,8 +9,22 @@ class Rectangle{
 		this.w = w;
 		this.h = h;
 	}
+//<text x="80" y="78" fill="black">Hello World</text>
+	create(svg){
+		svg.innerHTML = `
+			<g class="draggable">
+				<rect x="${this.x}" y="${this.y}" width="${this.w}" height="${this.h}" fill="#007bff"/>
+			</g>
+		`;
 
-	this.startDrag = function(event) {
+		svg.addEventListener('mousedown', this.startDrag);
+		svg.addEventListener('mousemove', this.drag);
+		svg.addEventListener('mouseup', this.endDrag);
+		svg.addEventListener('mouseleave', this.endDrag);
+	}
+
+	startDrag(event) {
+		console.log(selectedElement);
 		if (event.target.classList.contains('draggable')) {
     		selectedElement = event.target;
     		
@@ -22,7 +36,7 @@ class Rectangle{
   		}
 	}
 
-	this.drag = function (event) {
+	drag(event) {
 		if (selectedElement) {
 		    event.preventDefault();
 
@@ -32,11 +46,12 @@ class Rectangle{
     		selectedElement.setAttributeNS(null, "y", coord.y - offset.y);
   		}
 	}
-	function endDrag(event) {
+
+	endDrag(event) {
 		selectedElement = null;
 	}
 
-	function getMousePosition(evt) {
+	getMousePosition(evt) {
   		var CTM = svg.getScreenCTM();
 
 		return {
