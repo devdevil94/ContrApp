@@ -8,55 +8,52 @@ class Rectangle{
 		this.y = y;
 		this.w = w;
 		this.h = h;
+		this.rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+		this.offset= 0;
 	}
 //<text x="80" y="78" fill="black">Hello World</text>
-	create(svg){
-		svg.innerHTML = `
-			<g class="draggable">
-				<rect x="${this.x}" y="${this.y}" width="${this.w}" height="${this.h}" fill="#007bff"/>
-			</g>
-		`;
+	draw(svg){
+		this.rect.className.baseVal = 'draggable';
 
-		svg.addEventListener('mousedown', this.startDrag);
-		svg.addEventListener('mousemove', this.drag);
-		svg.addEventListener('mouseup', this.endDrag);
-		svg.addEventListener('mouseleave', this.endDrag);
+		this.rect.setAttributeNS(null, 'x', this.x);
+		this.rect.setAttributeNS(null, 'y', this.y);
+		this.rect.setAttributeNS(null, 'width', this.w);
+		this.rect.setAttributeNS(null, 'height', this.h);
+		this.rect.setAttributeNS(null, 'fill', '#007bff');
+
+		svg.appendChild(this.rect);
+	}
+
+	addEventListeners(){
+		this.rect.addEventListener('mousedown', this.startDrag);
+		this.rect.addEventListener('mousemove', this.drag);
+		this.rect.addEventListener('mouseup', this.endDrag);
+		this.rect.addEventListener('mouseleave', this.endDrag);
 	}
 
 	startDrag(event) {
-		console.log(selectedElement);
-		if (event.target.classList.contains('draggable')) {
-    		selectedElement = event.target;
-    		
-    		console.log(selectedElement);
-		    offset = getMousePosition(event);
 
-		    offset.x -= parseFloat(selectedElement.getAttributeNS(null, "x"));
-		    offset.y -= parseFloat(selectedElement.getAttributeNS(null, "y"));
-  		}
+		// console.log(event.target);
+
+	 //    this.offset = getMousePosition(event.target);
+
+	 //    this.offset.x -= parseFloat(event.target.getAttributeNS(null, "x"));
+	 //    this.offset.y -= parseFloat(event.target.getAttributeNS(null, "y"));
 	}
 
 	drag(event) {
-		if (selectedElement) {
-		    event.preventDefault();
+	// 	if (event.target.classList.contains('draggable')) {
+	// 	    event.preventDefault();
 
-		    var coord = getMousePosition(event);
+	// 	    var coord = getMousePosition(event.target);
 
-		    selectedElement.setAttributeNS(null, "x", coord.x - offset.x);
-    		selectedElement.setAttributeNS(null, "y", coord.y - offset.y);
-  		}
-	}
+	// 	    event.target.setAttributeNS(null, "x", coord.x - this.offset.x);
+ //    		event.target.setAttributeNS(null, "y", coord.y - this.offset.y);
+ //  		}
+	 }
 
 	endDrag(event) {
-		selectedElement = null;
+		// event.target = null;
 	}
 
-	getMousePosition(evt) {
-  		var CTM = svg.getScreenCTM();
-
-		return {
-			x: (evt.clientX - CTM.e) / CTM.a,
-			y: (evt.clientY - CTM.f) / CTM.d
-		};
-	}
 }
