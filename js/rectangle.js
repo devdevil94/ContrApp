@@ -25,7 +25,6 @@ class Rectangle{
 		this.rect.addEventListener('mousedown', this.startDrag);
 		this.rect.addEventListener('mousemove', this.drag);
 		this.rect.addEventListener('mouseup', this.endDrag);
-		this.rect.addEventListener('mouseleave', this.endDrag);
 
 		svg.appendChild(this.rect);
 	}
@@ -42,14 +41,10 @@ class Rectangle{
 
 		    this.dragging = true;
 		}
-	 //    event.target.addEventListener('mousemove', this.drag);
-	 //    event.target.addEventListener('mouseup', this.endDrag);
-		// event.target.addEventListener('mouseleave', this.endDrag);
 	}
 
 	drag(event) {
 		if(this.dragging){
-			console.log(event.target);
 		    event.preventDefault();
 
 		    var coord = getMousePosition(event);
