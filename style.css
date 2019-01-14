@@ -11,3 +11,7 @@ body{
 svg{
 	border: 1px solid black;
 }
+
+foreignObject {
+	pointer-events: none;
+}

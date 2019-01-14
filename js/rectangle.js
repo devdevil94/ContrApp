@@ -13,9 +13,10 @@ class Rectangle{
 		this.dragging = false;
 		this.rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
 		this.txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+		this.container = document.createElementNS('http://www.w3.org/2000/svg', 'g');
 	}
 //<text x="80" y="78" fill="black">Hello World</text>
-	draw(svg){
+	draw(svg, txt){
 		this.rect.className.baseVal = 'draggable';
 
 		this.rect.setAttributeNS(null, 'x', this.x);
@@ -29,20 +30,18 @@ class Rectangle{
 		this.rect.addEventListener('mouseup', this.endDrag);
 		this.rect.addEventListener('mouseleave', this.endDrag);
 		
-		svg.appendChild(this.rect);
+		this.txt.className.baseVal = 'draggable';
 
-	}
-
-	createText(svg, txt){
 		this.txt.setAttributeNS(null, "x", this.x);     
 		this.txt.setAttributeNS(null, "y", this.y); 
 		this.txt.setAttributeNS(null, "font-size", "30");
 
-		var txtNode = document.createTextNode(txt);
-		this.txt.appendChild(txtNode);
+		this.txt.appendChild(document.createTextNode(txt));
 
+		this.container.appendChild(this.txt);
+		this.container.appendChild(this.rect);
 
-		svg.appendChild(this.txt);
+		svg.appendChild(this.container);
 	}
 
 	startDrag(event) {
@@ -70,6 +69,7 @@ class Rectangle{
 		    event.preventDefault();
 
 		    var coord = getMousePosition(event);
+
 		    var transforms = event.target.transform.baseVal;
 		    var translate = transforms.getItem(0);
 
