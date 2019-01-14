@@ -30,11 +30,24 @@ class Rectangle{
 		this.rect.addEventListener('mouseup', this.endDrag);
 		this.rect.addEventListener('mouseleave', this.endDrag);
 		
+		// var txtSize = 0.5 * this.h;
+		// var txtWidth = 0.7 * this.w;
+
+		// var txtX = this.x + (txtWidth + (this.w - txtWidth)/2);
+		// var txtY = this.y + (txtSize + (this.h - txtSize)/2);
+
 		this.txt.className.baseVal = 'draggable';
 
 		this.txt.setAttributeNS(null, "x", this.x);     
 		this.txt.setAttributeNS(null, "y", this.y); 
-		this.txt.setAttributeNS(null, "font-size", "30");
+		this.txt.setAttributeNS(null, "font-size", 20);
+
+
+
+		this.txt.addEventListener('mousedown', this.startDrag);
+		this.txt.addEventListener('mousemove', this.drag);
+		this.txt.addEventListener('mouseup', this.endDrag);
+		this.txt.addEventListener('mouseleave', this.endDrag);
 
 		this.txt.appendChild(document.createTextNode(txt));
 
@@ -48,13 +61,14 @@ class Rectangle{
 		if(!this.dragging){
 			this.offset = getMousePosition(event);
 
-			var transforms = event.target.transform.baseVal;
-			var svg = event.target.parentNode;
+			var g = event.target.parentNode;
+			var svg = g.parentNode;
+			var transforms = g.transform.baseVal;
 
 			if (transforms.length == 0 || transforms.getItem(0).type != SVGTransform.SVG_TRANSFORM_TRANSLATE){
 				var translate = svg.createSVGTransform();
 				translate.setTranslate(0, 0);
-				event.target.transform.baseVal.insertItemBefore(translate, 0);
+				g.transform.baseVal.insertItemBefore(translate, 0);
 			}
 
     		this.offset.x -= transforms.getItem(0).matrix.e;
@@ -70,7 +84,8 @@ class Rectangle{
 
 		    var coord = getMousePosition(event);
 
-		    var transforms = event.target.transform.baseVal;
+		    var g = event.target.parentNode;
+		    var transforms = g.transform.baseVal;
 		    var translate = transforms.getItem(0);
 
 			translate.setTranslate(coord.x - this.offset.x, coord.y - this.offset.y);
