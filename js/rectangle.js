@@ -11,6 +11,7 @@ class Rectangle{
 		this.offset= 0;
 		this.dragging = false;
 		this.rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+		this.txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
 	}
 //<text x="80" y="78" fill="black">Hello World</text>
 	draw(svg){
@@ -25,8 +26,23 @@ class Rectangle{
 		this.rect.addEventListener('mousedown', this.startDrag);
 		this.rect.addEventListener('mousemove', this.drag);
 		this.rect.addEventListener('mouseup', this.endDrag);
-
+		this.rect.addEventListener('mouseleave', this.endDrag);
+		
 		svg.appendChild(this.rect);
+
+	}
+
+	createText(svg, txt){
+		this.txt.setAttributeNS(null, "x", this.x);     
+		this.txt.setAttributeNS(null, "y", this.y); 
+		this.txt.setAttributeNS(null, "font-size", "30");
+
+
+		var txtNode = document.createTextNode(txt);
+		this.txt.appendChild(txtNode);
+
+
+		svg.appendChild(this.txt);
 	}
 
 	startDrag(event) {
