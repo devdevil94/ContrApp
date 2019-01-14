@@ -9,6 +9,7 @@ class Rectangle{
 		this.w = w;
 		this.h = h;
 		this.offset= 0;
+		this.transform = null;
 		this.dragging = false;
 		this.rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
 		this.txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
@@ -37,7 +38,6 @@ class Rectangle{
 		this.txt.setAttributeNS(null, "y", this.y); 
 		this.txt.setAttributeNS(null, "font-size", "30");
 
-
 		var txtNode = document.createTextNode(txt);
 		this.txt.appendChild(txtNode);
 
@@ -47,13 +47,19 @@ class Rectangle{
 
 	startDrag(event) {
 		if(!this.dragging){
-		    this.offset = getMousePosition(event);
+			this.offset = getMousePosition(event);
 
-		    console.log('startDrag : x = ' + this.offset.x + ' y = ' + this.offset.y);
+			var transforms = event.target.transform.baseVal;
+			var svg = event.target.parentNode;
 
-		    this.offset.x -= parseFloat(event.target.getAttributeNS(null, "x"));
-		    this.offset.y -= parseFloat(event.target.getAttributeNS(null, "y"));
-		    console.log('startDrag : x = ' + this.offset.x + ' y = ' + this.offset.y);
+			if (transforms.length == 0 || transforms.getItem(0).type != SVGTransform.SVG_TRANSFORM_TRANSLATE){
+				var translate = svg.createSVGTransform();
+				translate.setTranslate(0, 0);
+				event.target.transform.baseVal.insertItemBefore(translate, 0);
+			}
+
+    		this.offset.x -= transforms.getItem(0).matrix.e;
+    		this.offset.y -= transforms.getItem(0).matrix.f;
 
 		    this.dragging = true;
 		}
@@ -64,16 +70,14 @@ class Rectangle{
 		    event.preventDefault();
 
 		    var coord = getMousePosition(event);
+		    var transforms = event.target.transform.baseVal;
+		    var translate = transforms.getItem(0);
 
-		    console.log('drag x = ' + this.offset.x + ' y = ' + this.offset.y);
-
-		    event.target.setAttributeNS(null, "x", coord.x - this.offset.x);
-			event.target.setAttributeNS(null, "y", coord.y - this.offset.y);
+			translate.setTranslate(coord.x - this.offset.x, coord.y - this.offset.y);
 		}
 	}
 
-	endDrag(event) {
-		console.log('endDrag');
+	endDrag() {
 		this.dragging = false;
 	}
 }
