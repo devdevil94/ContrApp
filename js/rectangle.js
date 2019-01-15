@@ -1,20 +1,37 @@
 
 class Rectangle{
 
+	//TODO: make the rectangle resize itself depending on the text inside it
 	constructor(x,y,w,h){
 		this.x = x;
 		this.y = y;
 		this.w = w;
 		this.h = h;
 		this.offset= 0;
-		this.txt = 'Hello';
+		this.txt = 'Hi';
 		this.dragging = false;
 		this.rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-		this.textElement = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+		this.textElement = document.createElementNS('http://www.w3.org/2000/svg', 'foreignObject');
 		this.container = document.createElementNS('http://www.w3.org/2000/svg', 'g');
 	}
-//<text x="80" y="78" fill="black">Hello World</text>
+
 	draw(svg){
+
+		this.createRect();
+
+		this.createText();
+
+
+		var translate = svg.createSVGTransform();
+		translate.setTranslate(this.x, this.y);
+		this.container.transform.baseVal.insertItemBefore(translate, 0);
+
+		this.container.className.baseVal = 'draggable plant';
+
+		svg.appendChild(this.container);
+	}
+
+	createRect(){
 		this.rect.setAttributeNS(null, 'width', this.w);
 		this.rect.setAttributeNS(null, 'height', this.h);
 		this.rect.setAttributeNS(null, 'fill', '#007bff');
@@ -24,6 +41,10 @@ class Rectangle{
 		this.rect.addEventListener('mouseup', this.endDrag);
 		this.rect.addEventListener('mouseleave', this.endDrag);
 
+		this.container.appendChild(this.rect);
+	}
+
+	createText(){
 		this.textElement.setAttributeNS(null, "x", this.w/2);     
 		this.textElement.setAttributeNS(null, "y", this.h/2); 
 		this.textElement.setAttributeNS(null, "font-size", 20);
@@ -35,24 +56,19 @@ class Rectangle{
 		this.textElement.addEventListener('mouseup', this.endDrag);
 		this.textElement.addEventListener('mouseleave', this.endDrag);
 
-		this.textElement.appendChild(document.createTextNode(this.txt));
+		var span = document.createElement('span');
+		span.appendChild(document.createTextNode(this.txt));
 
-		var translate = svg.createSVGTransform();
-		translate.setTranslate(this.x, this.y);
-		this.container.transform.baseVal.insertItemBefore(translate, 0);
+		this.textElement.appendChild(span);
 
-		this.container.className.baseVal = 'draggable';
-
-		this.container.appendChild(this.rect);
 		this.container.appendChild(this.textElement);
-
-		svg.appendChild(this.container);
 	}
 
 	getContainer(){return this.container;}
 
 	setText(txt){
-		this.textElement.childNodes[0].nodeValue = txt;
+		this.textElement.childNodes[0].innerText= txt;
+		console.log(this.textElement.childNodes[0].nodeValue);
 	}
 
 	startDrag(event) {

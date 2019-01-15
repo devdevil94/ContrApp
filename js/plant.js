@@ -18,8 +18,9 @@ class Plant{
 	create(svg){
 		this.rect = new Rectangle(this.x,this.y,RECT_WIDTH,RECT_HEIGHT);
 		this.rect.draw(svg);
-		this.tex = parsedFunction.toTex();
-		this.rect.setText(this.transFunction);
+		this.tex = this.parsedFunction.toTex();
+		console.log(this.tex);
+		this.rect.setText('$$ ' + this.tex + ' $$');
 	}
 
 	getRect(){return this.rect;}
