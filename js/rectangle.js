@@ -57,7 +57,7 @@ class Rectangle{
 
 	startDrag(event) {
 		if(!this.dragging){
-			this.offset = getMousePosition(event);
+			this.offset = Utils.getMousePosition(event);
 
 			var g = event.target.parentNode;
 			var svg = g.parentNode;
@@ -80,7 +80,7 @@ class Rectangle{
 		if(this.dragging){
 		    event.preventDefault();
 
-		    var coord = getMousePosition(event);
+		    var coord = Utils.getMousePosition(event);
 
 		    var g = event.target.parentNode;
 		    var transforms = g.transform.baseVal;
