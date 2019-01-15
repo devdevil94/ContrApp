@@ -10,7 +10,7 @@ class Rectangle{
 		this.transform = null;
 		this.dragging = false;
 		this.rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-		this.txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+		this.textElement = document.createElementNS('http://www.w3.org/2000/svg', 'text');
 		this.container = document.createElementNS('http://www.w3.org/2000/svg', 'g');
 	}
 //<text x="80" y="78" fill="black">Hello World</text>
@@ -26,30 +26,35 @@ class Rectangle{
 		this.rect.addEventListener('mouseup', this.endDrag);
 		this.rect.addEventListener('mouseleave', this.endDrag);
 
-		this.txt.className.baseVal = 'draggable';
+		this.textElement.className.baseVal = 'draggable';
 
-		this.txt.setAttributeNS(null, "x", this.w/2);     
-		this.txt.setAttributeNS(null, "y", this.h/2); 
-		this.txt.setAttributeNS(null, "font-size", 20);
-		this.txt.setAttributeNS(null, "alignment-baseline", "middle");
-		this.txt.setAttributeNS(null, "text-anchor", "middle");
+		this.textElement.setAttributeNS(null, "x", this.w/2);     
+		this.textElement.setAttributeNS(null, "y", this.h/2); 
+		this.textElement.setAttributeNS(null, "font-size", 20);
+		this.textElement.setAttributeNS(null, "alignment-baseline", "middle");
+		this.textElement.setAttributeNS(null, "text-anchor", "middle");
 
-		this.txt.addEventListener('mousedown', this.startDrag);
-		this.txt.addEventListener('mousemove', this.drag);
-		this.txt.addEventListener('mouseup', this.endDrag);
-		this.txt.addEventListener('mouseleave', this.endDrag);
+		this.textElement.addEventListener('mousedown', this.startDrag);
+		this.textElement.addEventListener('mousemove', this.drag);
+		this.textElement.addEventListener('mouseup', this.endDrag);
+		this.textElement.addEventListener('mouseleave', this.endDrag);
 
-		this.txt.appendChild(document.createTextNode(txt));
-
+		this.textElement.appendChild(document.createTextNode(txt));
 
 		var translate = svg.createSVGTransform();
 		translate.setTranslate(this.x, this.y);
 		this.container.transform.baseVal.insertItemBefore(translate, 0);
 
 		this.container.appendChild(this.rect);
-		this.container.appendChild(this.txt);
+		this.container.appendChild(this.textElement);
 
 		svg.appendChild(this.container);
+	}
+
+	getRectContainer(){return this.container;}
+
+	setText(txt){
+
 	}
 
 	startDrag(event) {
