@@ -19,8 +19,8 @@ class Rectangle{
 	draw(svg, txt){
 		this.rect.className.baseVal = 'draggable';
 
-		this.rect.setAttributeNS(null, 'x', this.x);
-		this.rect.setAttributeNS(null, 'y', this.y);
+		//this.rect.setAttributeNS(null, 'x', this.x);
+		//this.rect.setAttributeNS(null, 'y', this.y);
 		this.rect.setAttributeNS(null, 'width', this.w);
 		this.rect.setAttributeNS(null, 'height', this.h);
 		this.rect.setAttributeNS(null, 'fill', '#007bff');
@@ -29,20 +29,14 @@ class Rectangle{
 		this.rect.addEventListener('mousemove', this.drag);
 		this.rect.addEventListener('mouseup', this.endDrag);
 		this.rect.addEventListener('mouseleave', this.endDrag);
-		
-		// var txtSize = 0.5 * this.h;
-		// var txtWidth = 0.7 * this.w;
-
-		// var txtX = this.x + (txtWidth + (this.w - txtWidth)/2);
-		// var txtY = this.y + (txtSize + (this.h - txtSize)/2);
 
 		this.txt.className.baseVal = 'draggable';
 
-		this.txt.setAttributeNS(null, "x", this.x);     
-		this.txt.setAttributeNS(null, "y", this.y); 
+		this.txt.setAttributeNS(null, "x", this.w/2);     
+		this.txt.setAttributeNS(null, "y", this.h/2); 
 		this.txt.setAttributeNS(null, "font-size", 20);
-
-
+		this.txt.setAttributeNS(null, "alignment-baseline", "middle");
+		this.txt.setAttributeNS(null, "text-anchor", "middle");
 
 		this.txt.addEventListener('mousedown', this.startDrag);
 		this.txt.addEventListener('mousemove', this.drag);
@@ -51,8 +45,13 @@ class Rectangle{
 
 		this.txt.appendChild(document.createTextNode(txt));
 
-		this.container.appendChild(this.txt);
+
+		var translate = svg.createSVGTransform();
+		translate.setTranslate(this.x, this.y);
+		this.container.transform.baseVal.insertItemBefore(translate, 0);
+		
 		this.container.appendChild(this.rect);
+		this.container.appendChild(this.txt);
 
 		svg.appendChild(this.container);
 	}
