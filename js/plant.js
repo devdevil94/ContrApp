@@ -11,13 +11,11 @@ class Plant{
 
 	create(svg){
 		this.rect = new Rectangle(this.x,this.y,RECT_WIDTH,RECT_HEIGHT);
-		this.rect.draw(svg, 'Text');
+		this.rect.draw(svg);
 	}
 
 	getRect(){return this.rect;}
 
-	setText(txt){
-		this.txt = txt;
-	}
+	setText(txt){this.rect.setText(txt);}
 
 }

@@ -7,16 +7,14 @@ class Rectangle{
 		this.w = w;
 		this.h = h;
 		this.offset= 0;
-		this.transform = null;
+		this.txt = 'Hello';
 		this.dragging = false;
 		this.rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
 		this.textElement = document.createElementNS('http://www.w3.org/2000/svg', 'text');
 		this.container = document.createElementNS('http://www.w3.org/2000/svg', 'g');
 	}
 //<text x="80" y="78" fill="black">Hello World</text>
-	draw(svg, txt){
-		this.rect.className.baseVal = 'draggable';
-
+	draw(svg){
 		this.rect.setAttributeNS(null, 'width', this.w);
 		this.rect.setAttributeNS(null, 'height', this.h);
 		this.rect.setAttributeNS(null, 'fill', '#007bff');
@@ -25,8 +23,6 @@ class Rectangle{
 		this.rect.addEventListener('mousemove', this.drag);
 		this.rect.addEventListener('mouseup', this.endDrag);
 		this.rect.addEventListener('mouseleave', this.endDrag);
-
-		this.textElement.className.baseVal = 'draggable';
 
 		this.textElement.setAttributeNS(null, "x", this.w/2);     
 		this.textElement.setAttributeNS(null, "y", this.h/2); 
@@ -39,11 +35,13 @@ class Rectangle{
 		this.textElement.addEventListener('mouseup', this.endDrag);
 		this.textElement.addEventListener('mouseleave', this.endDrag);
 
-		this.textElement.appendChild(document.createTextNode(txt));
+		this.textElement.appendChild(document.createTextNode(this.txt));
 
 		var translate = svg.createSVGTransform();
 		translate.setTranslate(this.x, this.y);
 		this.container.transform.baseVal.insertItemBefore(translate, 0);
+
+		this.container.className.baseVal = 'draggable';
 
 		this.container.appendChild(this.rect);
 		this.container.appendChild(this.textElement);
@@ -51,10 +49,10 @@ class Rectangle{
 		svg.appendChild(this.container);
 	}
 
-	getRectContainer(){return this.container;}
+	getContainer(){return this.container;}
 
 	setText(txt){
-
+		this.textElement.childNodes[0].nodeValue = txt;
 	}
 
 	startDrag(event) {
