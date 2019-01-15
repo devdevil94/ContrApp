@@ -1,6 +1,4 @@
 
-
-
 class Rectangle{
 
 	constructor(x,y,w,h){
@@ -19,8 +17,6 @@ class Rectangle{
 	draw(svg, txt){
 		this.rect.className.baseVal = 'draggable';
 
-		//this.rect.setAttributeNS(null, 'x', this.x);
-		//this.rect.setAttributeNS(null, 'y', this.y);
 		this.rect.setAttributeNS(null, 'width', this.w);
 		this.rect.setAttributeNS(null, 'height', this.h);
 		this.rect.setAttributeNS(null, 'fill', '#007bff');
@@ -49,7 +45,7 @@ class Rectangle{
 		var translate = svg.createSVGTransform();
 		translate.setTranslate(this.x, this.y);
 		this.container.transform.baseVal.insertItemBefore(translate, 0);
-		
+
 		this.container.appendChild(this.rect);
 		this.container.appendChild(this.txt);
 
