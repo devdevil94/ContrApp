@@ -56,7 +56,7 @@ class Rectangle{
 		this.textElement.addEventListener('mouseup', this.endDrag);
 		this.textElement.addEventListener('mouseleave', this.endDrag);
 
-		var span = document.createElement('span');
+		var span = document.createElement('div');
 		span.appendChild(document.createTextNode(this.txt));
 
 		this.textElement.appendChild(span);

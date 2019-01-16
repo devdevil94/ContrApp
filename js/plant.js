@@ -25,5 +25,10 @@ class Plant{
 
 	getRect(){return this.rect;}
 
-	setTransferFunction(txt){this.rect.setText(txt);}
+	setTransferFunction(txt){
+		this.transFunction = txt;
+		this.parsedFunction = math.parse(this.transFunction);
+		this.tex = this.parsedFunction.toTex();
+		this.rect.setText('$$ ' + this.tex + ' $$');
+	}
 }
