@@ -15,3 +15,8 @@ svg{
 foreignObject {
 	pointer-events: none;
 }
+
+.plant-rect{
+	fill: white;
+	stroke: 1px;
+}

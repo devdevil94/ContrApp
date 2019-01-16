@@ -9,6 +9,7 @@ class Rectangle{
 		this.h = h;
 		this.offset= 0;
 		this.txt = 'Hi';
+		this.mjx = null;
 		this.dragging = false;
 		this.rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
 		this.textElement = document.createElementNS('http://www.w3.org/2000/svg', 'foreignObject');
@@ -18,9 +19,7 @@ class Rectangle{
 	draw(svg){
 
 		this.createRect();
-
 		this.createText();
-
 
 		var translate = svg.createSVGTransform();
 		translate.setTranslate(this.x, this.y);
@@ -34,7 +33,10 @@ class Rectangle{
 	createRect(){
 		this.rect.setAttributeNS(null, 'width', this.w);
 		this.rect.setAttributeNS(null, 'height', this.h);
-		this.rect.setAttributeNS(null, 'fill', '#007bff');
+		this.rect.setAttributeNS(null, 'stroke', 'black');
+		this.rect.setAttributeNS(null, 'fill', 'white');
+
+		//this.rect.className.baseVal = 'plant-rect';
 
 		this.rect.addEventListener('mousedown', this.startDrag);
 		this.rect.addEventListener('mousemove', this.drag);
@@ -45,18 +47,18 @@ class Rectangle{
 	}
 
 	createText(){
-		this.textElement.setAttributeNS(null, "x", this.w/2);     
-		this.textElement.setAttributeNS(null, "y", this.h/2); 
-		this.textElement.setAttributeNS(null, "font-size", 20);
-		this.textElement.setAttributeNS(null, "alignment-baseline", "middle");
-		this.textElement.setAttributeNS(null, "text-anchor", "middle");
+		this.textElement.setAttributeNS(null, "x", 0);     
+		this.textElement.setAttributeNS(null, "y", 0); 
+		this.textElement.setAttributeNS(null, "font-size", 18);
 
 		this.textElement.addEventListener('mousedown', this.startDrag);
 		this.textElement.addEventListener('mousemove', this.drag);
 		this.textElement.addEventListener('mouseup', this.endDrag);
 		this.textElement.addEventListener('mouseleave', this.endDrag);
 
-		var span = document.createElement('div');
+		var span = document.createElement('span');
+		span.className = 'latex-span';
+		span.setAttribute('lang', 'latex');
 		span.appendChild(document.createTextNode(this.txt));
 
 		this.textElement.appendChild(span);
@@ -66,9 +68,17 @@ class Rectangle{
 
 	getContainer(){return this.container;}
 
-	setText(txt){
-		this.textElement.childNodes[0].innerText= txt;
-		console.log(this.textElement.childNodes[0].nodeValue);
+	setText(txt){this.textElement.childNodes[0].innerText = txt;}
+
+	getLaTex(){
+		var laTexSpan = this.textElement.childNodes[0];
+
+		if (laTexSpan.className == 'latex-span') {
+			var latex = laTexSpan.childNodes[0];
+			return latex;
+		}
+
+		return null;
 	}
 
 	startDrag(event) {
