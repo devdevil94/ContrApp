@@ -7,9 +7,9 @@ class Plant{
 		this.txt = '';
 		this.rect = null;
 
-		this.input = '5t';
+		this.input = '';
 		this.output = '';
-		this.transFunction = '4t+3';
+		this.transFunction = '';
 
 		this.parsedFunction = math.parse(this.transFunction);
 		this.tex = '';
@@ -28,6 +28,19 @@ class Plant{
 		this.transFunction = txt;
 		this.parsedFunction = math.parse(this.transFunction);
 		this.tex = this.parsedFunction.toTex();
+		this.fixDimensions();
 		this.rect.setText('$$ ' + this.tex + ' $$');
+	}
+
+	fixDimensions(){
+		if(this.transFunction.includes('/')){
+			var container = this.rect.getContainer();
+			var fObject = container.childNodes[1];
+			console.log(fObject);
+			var latexSpan = fObject.childNodes[0];
+			console.log(latexSpan);
+			var latex = latexSpan.childNodes[1];
+			console.log(latex);
+		}
 	}
 }

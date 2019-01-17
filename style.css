@@ -16,7 +16,7 @@ foreignObject {
 	pointer-events: none;
 }
 
-.plant-rect{
-	fill: white;
-	stroke: 1px;
+.latex-span .latex{
+	width: 40px;
+	height: 40px;
 }

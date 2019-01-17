@@ -8,8 +8,7 @@ class Rectangle{
 		this.w = w;
 		this.h = h;
 		this.offset= 0;
-		this.txt = 'Hi';
-		this.mjx = null;
+		this.txt = '';
 		this.dragging = false;
 		this.rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
 		this.textElement = document.createElementNS('http://www.w3.org/2000/svg', 'foreignObject');
@@ -36,8 +35,6 @@ class Rectangle{
 		this.rect.setAttributeNS(null, 'stroke', 'black');
 		this.rect.setAttributeNS(null, 'fill', 'white');
 
-		//this.rect.className.baseVal = 'plant-rect';
-
 		this.rect.addEventListener('mousedown', this.startDrag);
 		this.rect.addEventListener('mousemove', this.drag);
 		this.rect.addEventListener('mouseup', this.endDrag);
@@ -47,9 +44,9 @@ class Rectangle{
 	}
 
 	createText(){
-		this.textElement.setAttributeNS(null, "x", 0);     
-		this.textElement.setAttributeNS(null, "y", 0); 
-		this.textElement.setAttributeNS(null, "font-size", 18);
+		this.textElement.setAttributeNS(null, "x", 0.33*this.w);
+		//Width of the text can be modified based on the number of chars in this.     
+		this.textElement.setAttributeNS(null, "y", 0.25*this.h); 
 
 		this.textElement.addEventListener('mousedown', this.startDrag);
 		this.textElement.addEventListener('mousemove', this.drag);
@@ -68,17 +65,8 @@ class Rectangle{
 
 	getContainer(){return this.container;}
 
-	setText(txt){this.textElement.childNodes[0].innerText = txt;}
-
-	getLaTex(){
-		var laTexSpan = this.textElement.childNodes[0];
-
-		if (laTexSpan.className == 'latex-span') {
-			var latex = laTexSpan.childNodes[0];
-			return latex;
-		}
-
-		return null;
+	setText(txt){
+		this.textElement.childNodes[0].innerText = txt;
 	}
 
 	startDrag(event) {
