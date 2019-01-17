@@ -52,7 +52,7 @@ class Rectangle{
 		this.textElement.addEventListener('mouseup', this.endDrag);
 		this.textElement.addEventListener('mouseleave', this.endDrag);
 
-		this.addNewLaTexSpan(this.txt);
+		this.setFunction(this.txt);
 
 		this.container.appendChild(this.textElement);
 	}
@@ -61,31 +61,26 @@ class Rectangle{
 		//Adjust Function position when there is a fraction
 	}
 
-	addNewLaTexSpan(txt){
-		if(this.textElement.childNodes[0]){
-			this.textElement.removeChild(this.textElement.childNodes[0]);
-		}
-
-		var img = document.createElement('img');
-		img.setAttribute('src', 'http://latex.codecogs.com/svg.latex?' + math.parse(txt).toTex());
-
-		if(txt.includes('/')){
-			img.className = 'latex-img-frac';
-		}else{
-			img.className = 'latex-img';
-		}
-		//img.appendChild(document.createTextNode('$$ ' + txt + ' $$'));
-		this.textElement.appendChild(img);
+	addNewLaTexImg(txt){
+		
 	}
 
 	getContainer(){return this.container;}
 
 	setFunction(func){
-		var parsedFunction = math.parse(func);
-		var tex = parsedFunction.toTex();
+		if(this.textElement.childNodes[0]){
+			this.textElement.removeChild(this.textElement.childNodes[0]);
+		}
 
-		this.addNewLaTexSpan(func);
-		//this.textElement.childNodes[0].innerText = ;
+		var img = document.createElement('img');
+		img.setAttribute('src', 'http://latex.codecogs.com/svg.latex?' + math.parse(func).toTex());
+
+		if(func.includes('/')){
+			img.className = 'latex-img-frac';
+		}else{
+			img.className = 'latex-img';
+		}
+		this.textElement.appendChild(img);
 	}
 
 	startDrag(event) {

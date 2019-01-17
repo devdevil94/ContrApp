@@ -6,33 +6,34 @@ var outputDiv = document.getElementById('output');
 
 var plant1 = new Plant(80,50);
 plant1.create(svg);
-plant1.setTransferFunction('(3 + t)');
-
-// var plant2 = new Plant(200,150);
-// plant2.create(svg);
-// plant2.setTransferFunction('1/3 - t');
-
+plant1.setTransferFunction('1');
 plant1.determineOutput();
 
 var out = plant1.getOutput();
-var outTex = math.parse(out).toTex();
-
-outputTxt = document.createTextNode('Output = ' + outTex);
-outputDiv.appendChild(outputTxt);
 
 var editButton = document.getElementById('edit');
 var tFunctionInput = document.getElementById('tFunction');
 
+changeOutputDiv();
+
 editButton.addEventListener('click', function(){
-	var tFunctionValue = tFunction.value;
+	var tFunctionValue = tFunctionInput.value;
 
 	plant1.setTransferFunction(tFunctionValue);
-	load_js();
+	plant1.determineOutput();
+	out = plant1.getOutput();
+
+	changeOutputDiv();
+
 });
 
-function load_js(){
-	var head = document.getElementsByTagName('head')[0];
-	var script = document.createElement('script');
-	script.src = 'http://latex.codecogs.com/latexit.js';
-	head.appendChild(script);
+function changeOutputDiv(){
+	var img = document.createElement('img');
+	img.src = 'http://latex.codecogs.com/svg.latex?' + math.parse(out).toTex();
+
+	if(outputDiv.childNodes.length > 1){
+		console.log(outputDiv.childNodes);
+		outputDiv.removeChild(outputDiv.childNodes[2]);
+	}
+	outputDiv.appendChild(img);
 }

@@ -4,7 +4,6 @@ class Plant{
 	constructor(x,y){
 		this.x = x;
 		this.y = y;
-		this.txt = '';
 		this.rect = null;
 
 		this.input = 't';
@@ -24,7 +23,8 @@ class Plant{
 
 	getOutput(){return this.output;}
 
-	//getRect(){return this.rect;}
+
+	setInput(input){ this.input = input;}
 
 	setTransferFunction(txt){
 		this.transFunction = txt;
