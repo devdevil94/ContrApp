@@ -53,20 +53,39 @@ class Rectangle{
 		this.textElement.addEventListener('mouseup', this.endDrag);
 		this.textElement.addEventListener('mouseleave', this.endDrag);
 
-		var span = document.createElement('span');
-		span.className = 'latex-span';
-		span.setAttribute('lang', 'latex');
-		span.appendChild(document.createTextNode(this.txt));
-
-		this.textElement.appendChild(span);
+		this.addNewLaTexSpan(this.txt);
 
 		this.container.appendChild(this.textElement);
 	}
 
+	adjustFunctionPosition(){
+		//Adjust Function position when there is a fraction
+	}
+
+	addNewLaTexSpan(txt){
+		if(this.textElement.childNodes[0]){
+			this.textElement.removeChild(this.textElement.childNodes[0]);
+		}
+
+		var span = document.createElement('span');
+		span.setAttribute('lang', 'latex');
+		if(txt.includes('/')){
+			span.className = 'latex-span-frac';
+		}else{
+			span.className = 'latex-span';
+		}
+		span.appendChild(document.createTextNode(this.txt));
+		this.textElement.appendChild(span);
+	}
+
 	getContainer(){return this.container;}
 
-	setText(txt){
-		this.textElement.childNodes[0].innerText = txt;
+	setFunction(func){
+		var parsedFunction = math.parse(func);
+		var tex = parsedFunction.toTex();
+
+		this.addNewLaTexSpan(func);
+		this.textElement.childNodes[0].innerText = '$$ ' + tex + ' $$';
 	}
 
 	startDrag(event) {
