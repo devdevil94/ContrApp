@@ -44,8 +44,7 @@ class Rectangle{
 	}
 
 	createText(){
-		this.textElement.setAttributeNS(null, "x", 0.33*this.w);
-		//Width of the text can be modified based on the number of chars in this.     
+		this.textElement.setAttributeNS(null, "x", 0.33*this.w);//Width of the text can be modified based on the number of chars.    
 		this.textElement.setAttributeNS(null, "y", 0.25*this.h); 
 
 		this.textElement.addEventListener('mousedown', this.startDrag);
@@ -67,15 +66,16 @@ class Rectangle{
 			this.textElement.removeChild(this.textElement.childNodes[0]);
 		}
 
-		var span = document.createElement('span');
-		span.setAttribute('lang', 'latex');
+		var img = document.createElement('img');
+		img.setAttribute('src', 'http://latex.codecogs.com/svg.latex?' + math.parse(txt).toTex());
+
 		if(txt.includes('/')){
-			span.className = 'latex-span-frac';
+			img.className = 'latex-img-frac';
 		}else{
-			span.className = 'latex-span';
+			img.className = 'latex-img';
 		}
-		span.appendChild(document.createTextNode(txt));
-		this.textElement.appendChild(span);
+		//img.appendChild(document.createTextNode('$$ ' + txt + ' $$'));
+		this.textElement.appendChild(img);
 	}
 
 	getContainer(){return this.container;}
@@ -85,7 +85,7 @@ class Rectangle{
 		var tex = parsedFunction.toTex();
 
 		this.addNewLaTexSpan(func);
-		this.textElement.childNodes[0].innerText = '$$ ' + tex + ' $$';
+		//this.textElement.childNodes[0].innerText = ;
 	}
 
 	startDrag(event) {
