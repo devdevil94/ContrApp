@@ -26,6 +26,10 @@ foreignObject {
 	height: 40px;
 }
 
-#answer{
+#output{
+	padding-top: 50px;
+}
+
+#function-edit{
 	padding-top: 50px;
 }

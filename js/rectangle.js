@@ -74,7 +74,7 @@ class Rectangle{
 		}else{
 			span.className = 'latex-span';
 		}
-		span.appendChild(document.createTextNode(this.txt));
+		span.appendChild(document.createTextNode(txt));
 		this.textElement.appendChild(span);
 	}
 
