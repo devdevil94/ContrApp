@@ -7,7 +7,7 @@ class Plant{
 		this.txt = '';
 		this.rect = null;
 
-		this.input = '';
+		this.input = 't';
 		this.output = '';
 		this.transFunction = 't';
 	}
@@ -18,7 +18,13 @@ class Plant{
 		this.rect.setFunction(this.transFunction);
 	}
 
-	getRect(){return this.rect;}
+	determineOutput(){
+		this.output = this.input +  ' * ' + this.transFunction;  
+	}
+
+	getOutput(){return this.output;}
+
+	//getRect(){return this.rect;}
 
 	setTransferFunction(txt){
 		this.transFunction = txt;
