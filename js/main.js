@@ -37,3 +37,9 @@ function changeOutputDiv(){
 	}
 	outputDiv.appendChild(img);
 }
+
+
+// svg.addEventListener('click', function(event){
+// 	var plant = new Plant(event.clientX, event.clientY);
+// 	plant.create(svg);
+// });
