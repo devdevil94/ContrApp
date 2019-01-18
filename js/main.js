@@ -2,17 +2,31 @@
 
 var svg = new SVG(SVG_WIDTH, SVG_HEIGHT).getSVG();
 
-var start = {
+var start1 = {
 	x: 50,
 	y: 180
 }
-var end = {
+var end1 = {
 	x: 150,
 	y: 60
 }
 
-var line = new Line(start, end);
-line.draw(svg);
+var line1 = new Line(start1, end1);
+line1.createArrowhead(svg);
+line1.draw(svg);
+
+var start2 = {
+	x: 250,
+	y: 80
+}
+var end2 = {
+	x: 50,
+	y: 160
+}
+
+var line2 = new Line(start2, end2);
+line2.createArrowhead(svg);
+line2.draw(svg);
 
 
 
