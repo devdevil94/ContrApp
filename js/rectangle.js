@@ -8,7 +8,6 @@ class Rectangle{
 		this.w = w;
 		this.h = h;
 		this.offset= 0;
-		this.txt = '';
 		this.dragging = false;
 		this.rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
 		this.textElement = document.createElementNS('http://www.w3.org/2000/svg', 'foreignObject');
@@ -59,10 +58,6 @@ class Rectangle{
 
 	adjustFunctionPosition(){
 		//Adjust Function position when there is a fraction
-	}
-
-	addNewLaTexImg(txt){
-		
 	}
 
 	getContainer(){return this.container;}

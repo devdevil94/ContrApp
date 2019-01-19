@@ -11,4 +11,10 @@ class Utils{
 		};
 	}
 
+	static setSvgElementAttributes(el,attrsObj){
+		for(var attr in attrsObj) {
+        	el.setAttributeNS(null, attr, attrsObj[attr])  
+    	}
+	}
+
 }
