@@ -7,11 +7,11 @@ class Line{
 		this.startY = startPoint.y;
 		this.endX = endPoint.x;
 		this.endY = endPoint.y;
+		this.line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
 	}
 
 	draw(svg){
-		var path = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-		var pathAttrs = {
+		var lineAttrs = {
 			'x1': this.startX,
 			'y1': this.startY,
 			'x2': this.endX,
@@ -21,9 +21,13 @@ class Line{
 			'marker-start': 'url(#arrowhead)',
 			'marker-end': 'url(#arrowend)'
 		};
-		Utils.setSvgElementAttributes(path, pathAttrs);
+		Utils.setSvgElementAttributes(this.line, lineAttrs);
 
-		svg.appendChild(path);
+		svg.appendChild(this.line);
+	}
+
+	removeArrowhead(){
+		Utils.setSvgElementAttributes(this.line, {'marker-start': ''});
 	}
 
 }
