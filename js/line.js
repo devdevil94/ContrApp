@@ -10,40 +10,20 @@ class Line{
 	}
 
 	draw(svg){
-		var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+		var path = document.createElementNS('http://www.w3.org/2000/svg', 'line');
 		var pathAttrs = {
-			'd': 'M' + this.startX + ',' + this.startY + 'L' + this.endX + ',' + this.endY,
+			'x1': this.startX,
+			'y1': this.startY,
+			'x2': this.endX,
+			'y2': this.endY,
 			'stroke': 'black',
 			'stroke-width': 5,
-			'marker-end': 'url(#arrow)'
+			'marker-start': 'url(#arrowhead)',
+			'marker-end': 'url(#arrowend)'
 		};
 		Utils.setSvgElementAttributes(path, pathAttrs);
 
 		svg.appendChild(path);
 	}
 
-	createArrowhead(svg){
-		var defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
-		var marker = document.createElementNS('http://www.w3.org/2000/svg', 'marker');
-		var markerPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-
-		markerPath.setAttributeNS(null, 'fill', '#000');
-		markerPath.setAttributeNS(null, 'd', 'M0,0 L0,6 L9,3 z');
-
-		var markerAttrs = {
-			'id': 'arrow',
-			'markerWidth': 10,
-			'markerHeight': 10,
-			'refX': 0,
-			'refY': 3,
-			'orient': 'auto',
-			'markerUnits': 'strokeWidth'
-		};
-
-		Utils.setSvgElementAttributes(marker, markerAttrs);
-
-		marker.appendChild(markerPath);
-		defs.appendChild(marker);
-		svg.appendChild(defs);
-	}
 }
