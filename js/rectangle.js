@@ -31,7 +31,7 @@ class Rectangle{
 	createRect(){
 		this.rect.setAttributeNS(null, 'width', this.w);
 		this.rect.setAttributeNS(null, 'height', this.h);
-		this.rect.setAttributeNS(null, 'stroke', 'black');
+		this.rect.setAttributeNS(null, 'stroke', '#000');
 		this.rect.setAttributeNS(null, 'fill', 'white');
 
 		this.rect.addEventListener('mousedown', this.startDrag);

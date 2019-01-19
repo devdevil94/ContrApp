@@ -8,26 +8,45 @@ class Line{
 		this.endX = endPoint.x;
 		this.endY = endPoint.y;
 		this.line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+		this.square = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+		this.circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
 	}
 
 	draw(svg){
-		var lineAttrs = {
+		Utils.setSvgElementAttributes(this.line, {
 			'x1': this.startX,
 			'y1': this.startY,
 			'x2': this.endX,
 			'y2': this.endY,
 			'stroke': 'black',
-			'stroke-width': 5,
-			'marker-start': 'url(#arrowhead)',
-			'marker-end': 'url(#arrowend)'
-		};
-		Utils.setSvgElementAttributes(this.line, lineAttrs);
+			'stroke-width': 2,
+		});
 
+		Utils.setSvgElementAttributes(this.square, {
+			'x': this.endX-5,
+			'y': this.endY-5,
+			'width': 10,
+			'height': 10,
+			'stroke': 'none',
+			'fill': '#000'
+		});
+
+		Utils.setSvgElementAttributes(this.circle, {
+			'cx': this.startX,
+			'cy': this.startY,
+			'r': 5,
+			'stroke': 'none',
+			'fill': '#000'
+		});
+
+		svg.appendChild(this.circle);
 		svg.appendChild(this.line);
+		svg.appendChild(this.square);
 	}
 
+
 	removeArrowhead(){
-		Utils.setSvgElementAttributes(this.line, {'marker-start': ''});
+		this.arrowhead = null;
 	}
 
 }
