@@ -9,10 +9,15 @@ class Line{
 		this.endY = endPoint.y;
 		this.dragging = false;
 		this.point = null;
+		this.func = null;
 		this.line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
 		this.square = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
 		this.circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
 		this.lineGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+	}
+
+	setFunctionFromOutputToInput(func){
+		this.func = func;
 	}
 
 	draw(svg){
