@@ -17,17 +17,17 @@ var end1 = {
 var line1 = new Line(start1, end1);
 line1.draw(svg);
 
-var start2 = {
-	x: 250,
-	y: 80
-};
-var end2 = {
-	x: 50,
-	y: 160
-};
+// var start2 = {
+// 	x: 250,
+// 	y: 80
+// };
+// var end2 = {
+// 	x: 50,
+// 	y: 160
+// };
 
-var line2 = new Line(start2, end2);
-line2.draw(svg);
+// var line2 = new Line(start2, end2);
+// line2.draw(svg);
 
 
 
