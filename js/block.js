@@ -1,5 +1,5 @@
 
-class Plant{
+class Block{
 
 	constructor(x,y){
 		this.x = x;
@@ -24,7 +24,7 @@ class Plant{
 	getOutput(){return this.output;}
 
 
-	setInput(input){ this.input = input;}
+	setInput(input){this.input = input;}
 
 	setTransferFunction(txt){
 		this.transFunction = txt;

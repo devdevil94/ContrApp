@@ -1,7 +1,9 @@
 
 
 class Line{
-	
+	//TODO: Check if the line can be selected. It might be necessary to chance <line>
+	// into a <rect> with a very small hight so it can be selected freely.
+
 	constructor(startPoint,endPoint){
 		this.startX = startPoint.x;
 		this.startY = startPoint.y;

@@ -12,12 +12,18 @@ class Rectangle{
 		this.rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
 		this.textElement = document.createElementNS('http://www.w3.org/2000/svg', 'foreignObject');
 		this.container = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+
+		this.topCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+		this.bottomCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+		this.leftCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+		this.rightCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
 	}
 
 	draw(svg){
 
 		this.createRect();
 		this.createText();
+		this.createInOutCircles();
 
 		var translate = svg.createSVGTransform();
 		translate.setTranslate(this.x, this.y);
@@ -26,6 +32,45 @@ class Rectangle{
 		this.container.className.baseVal = 'draggable plant';
 
 		svg.appendChild(this.container);
+	}
+
+	createInOutCircles(){
+		Utils.setSvgElementAttributes(this.topCircle, {
+			'cx': this.w/2,
+			'cy': 0,
+			'r': INOUT_CIRCLE_RADIUS,
+			'stroke': 'none',
+			'fill': '#000'
+		});
+
+		Utils.setSvgElementAttributes(this.bottomCircle, {
+			'cx': this.w/2,
+			'cy': this.h,
+			'r': INOUT_CIRCLE_RADIUS,
+			'stroke': 'none',
+			'fill': '#000'
+		});
+
+		Utils.setSvgElementAttributes(this.rightCircle, {
+			'cx': 0,
+			'cy': this.h/2,
+			'r': INOUT_CIRCLE_RADIUS,
+			'stroke': 'none',
+			'fill': '#000'
+		});
+
+		Utils.setSvgElementAttributes(this.leftCircle, {
+			'cx': this.w,
+			'cy': this.h/2,
+			'r': INOUT_CIRCLE_RADIUS,
+			'stroke': 'none',
+			'fill': '#000'
+		});		
+
+		this.container.appendChild(this.topCircle);
+		this.container.appendChild(this.bottomCircle);
+		this.container.appendChild(this.rightCircle);
+		this.container.appendChild(this.leftCircle);
 	}
 
 	createRect(){
@@ -51,14 +96,15 @@ class Rectangle{
 		this.textElement.addEventListener('mouseup', this.endDrag);
 		this.textElement.addEventListener('mouseleave', this.endDrag);
 
-		this.setFunction(this.txt);
-
 		this.container.appendChild(this.textElement);
 	}
 
 	adjustFunctionPosition(){
 		//Adjust Function position when there is a fraction
 	}
+
+
+	getNumberOfFractions(){}
 
 	getContainer(){return this.container;}
 
@@ -68,7 +114,8 @@ class Rectangle{
 		}
 
 		var img = document.createElement('img');
-		img.setAttribute('src', 'http://latex.codecogs.com/svg.latex?' + math.parse(func).toTex());
+		console.log(func);
+		img.src = 'http://latex.codecogs.com/svg.latex?' + math.parse(func).toTex();
 
 		if(func.includes('/')){
 			img.className = 'latex-img-frac';
