@@ -39,9 +39,9 @@ class Line{
 			'fill': '#000'
 		});
 
-		this.square.addEventListener('mousedown', this.startDrag);
-		this.square.addEventListener('mousemove', this.drag);
-		this.square.addEventListener('mouseup', this.endDrag);
+		//this.square.addEventListener('mousedown', this.startDrag);
+		//this.square.addEventListener('mousemove', this.drag);
+		//this.square.addEventListener('mouseup', this.endDrag);
 		//this.square.addEventListener('mouseleave', this.endDrag);
 
 

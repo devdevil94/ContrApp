@@ -5,17 +5,26 @@ Utils.createArrowhead(svg);
 Utils.createArrowend(svg);
 /////////////////////////////////////
 
-var start1 = {
-	x: 50,
-	y: 180
-};
-var end1 = {
-	x: 150,
-	y: 60
-};
+var path = new Path(svg);
 
-var line1 = new Line(start1, end1);
-line1.draw(svg);
+
+
+
+
+
+
+
+// var start1 = {
+// 	x: 50,
+// 	y: 180
+// };
+// var end1 = {
+// 	x: 150,
+// 	y: 60
+// };
+
+// var line1 = new Line(start1, end1);
+// line1.draw(svg);
 
 // var start2 = {
 // 	x: 250,
