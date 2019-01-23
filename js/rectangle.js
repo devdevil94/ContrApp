@@ -23,7 +23,7 @@ class Rectangle{
 
 		this.createRect();
 		this.createText();
-		this.createInOutCircles();
+		this.createInOutCircles(svg);
 
 		var translate = svg.createSVGTransform();
 		translate.setTranslate(this.x, this.y);
@@ -34,7 +34,16 @@ class Rectangle{
 		svg.appendChild(this.container);
 	}
 
-	createInOutCircles(){
+	getInOutCircles(){
+		return {
+			top: this.topCircle,
+			bottom: this.bottomCircle,
+			right: this.rightCircle,
+			left: this.leftCircle
+		};
+	}
+
+	createInOutCircles(svg){
 		Utils.setSvgElementAttributes(this.topCircle, {
 			'cx': this.w/2,
 			'cy': 0,
@@ -65,12 +74,19 @@ class Rectangle{
 			'r': INOUT_CIRCLE_RADIUS,
 			'stroke': 'none',
 			'fill': '#000'
-		});		
+		});
+
+
+		this.rightCircle.addEventListener('click', this.createPath(svg,0,this.h/2));
 
 		this.container.appendChild(this.topCircle);
 		this.container.appendChild(this.bottomCircle);
 		this.container.appendChild(this.rightCircle);
 		this.container.appendChild(this.leftCircle);
+	}
+
+	createPath(svg,x,y){
+		var path = new Path(svg,x,y);
 	}
 
 	createRect(){
@@ -100,7 +116,7 @@ class Rectangle{
 	}
 
 	adjustFunctionPosition(){
-		//Adjust Function position when there is a fraction
+		//Adjust Function position when there is/are fraction(s)
 	}
 
 
@@ -160,7 +176,5 @@ class Rectangle{
 		}
 	}
 
-	endDrag() {
-		this.dragging = false;
-	}
+	endDrag() { this.dragging = false; }
 }

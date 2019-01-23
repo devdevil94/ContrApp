@@ -6,4 +6,4 @@ const SVG_HEIGHT = 600;
 const RECT_WIDTH = 120;
 const RECT_HEIGHT = 80;
 
-const INOUT_CIRCLE_RADIUS = 5;
+const INOUT_CIRCLE_RADIUS = 3;

@@ -12,6 +12,10 @@ svg{
 	border: 1px solid black;
 }
 
+svg g circle:hover{
+	fill: #f00;
+}
+
 foreignObject {
 	pointer-events: none;
 }

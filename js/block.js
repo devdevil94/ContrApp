@@ -18,13 +18,12 @@ class Block{
 	}
 
 	determineOutput(){
-		this.output = this.input +  ' * ' + this.transFunction;  
+		this.output = this.input +  '*' + this.transFunction;  
 	}
 
-	getOutput(){return this.output;}
+	getOutput(){ return this.output; }
 
-
-	setInput(input){this.input = input;}
+	setInput(input){ this.input = input; }
 
 	setTransferFunction(txt){
 		this.transFunction = txt;
