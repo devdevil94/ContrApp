@@ -15,18 +15,22 @@ class Path{
 	get outputFunction(){return this.outFunction;}
 
 	addNewLine(event){
-		var currentPoint = Utils.getMousePosition(event);
 
-		var Xcurrent = currentPoint.x; var Ycurrent = currentPoint.y;
+		if(event.target.getAttribute('id') == 'svg'){
+			var currentPoint = Utils.getMousePosition(event);
 
-		var start = {x: this.Xprev, y: this.Yprev};
-		var end = {x: Xcurrent, y: Ycurrent};
-		
-		this.Xprev = Xcurrent; this.Yprev = Ycurrent;
+			var Xcurrent = currentPoint.x; var Ycurrent = currentPoint.y;
 
-		var newLine = new Line(start, end);
-		var svg = event.target;
-		newLine.draw(svg);
+			var start = {x: this.Xprev, y: this.Yprev};
+			var end = {x: Xcurrent, y: Ycurrent};
+			
+			this.Xprev = Xcurrent; this.Yprev = Ycurrent;
+
+			var target = event.target;
+
+			var newLine = new Line(start, end);
+			newLine.draw(svg);
+		}
 	}
 
 	isListEmpty(){return this.lineList.length == 0;}

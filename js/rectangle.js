@@ -76,17 +76,10 @@ class Rectangle{
 			'fill': '#000'
 		});
 
-
-		this.rightCircle.addEventListener('click', this.createPath(svg,0,this.h/2));
-
 		this.container.appendChild(this.topCircle);
 		this.container.appendChild(this.bottomCircle);
 		this.container.appendChild(this.rightCircle);
 		this.container.appendChild(this.leftCircle);
-	}
-
-	createPath(svg,x,y){
-		var path = new Path(svg,x,y);
 	}
 
 	createRect(){
@@ -130,7 +123,6 @@ class Rectangle{
 		}
 
 		var img = document.createElement('img');
-		console.log(func);
 		img.src = 'http://latex.codecogs.com/svg.latex?' + math.parse(func).toTex();
 
 		if(func.includes('/')){

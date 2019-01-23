@@ -9,12 +9,27 @@ class Block{
 		this.input = 't';
 		this.output = '';
 		this.transFunction = 't';
+
 	}
 
 	create(svg){
-		this.rect = new Rectangle(this.x,this.y,RECT_WIDTH,RECT_HEIGHT);
+		this.rect = new Rectangle(this.x,this.y,BLOCK_WIDTH,BLOCK_HEIGHT);
 		this.rect.draw(svg);
 		this.rect.setFunction(this.transFunction);
+
+		var blockCircles = this.rect.getInOutCircles();
+		for(var circle in blockCircles)
+			blockCircles[circle].addEventListener('click', this.createPath);
+	}
+
+	createPath(event){
+		var blockCircle = event.target;
+		console.log(blockCircle);
+		var x = blockCircle.getAttributeNS(null, 'cx');
+		var y = blockCircle.getAttributeNS(null, 'cy');
+		var svg = blockCircle.parentNode.parentNode;
+		console.log(svg);
+		var path = new Path(svg,x,y);
 	}
 
 	determineOutput(){
