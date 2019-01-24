@@ -17,18 +17,17 @@ class Block{
 		this.rect.draw(svg);
 		this.rect.setFunction(this.transFunction);
 
-		var blockCircles = this.rect.getInOutCircles();
-		for(var circle in blockCircles)
-			blockCircles[circle].addEventListener('click', this.createPath);
+		//var blockCircles = this.rect.getInOutCircles();
+		// for(var circle in blockCircles)
+		// 	blockCircles[circle].addEventListener('click', this.createPath);
 	}
 
 	createPath(event){
 		var blockCircle = event.target;
-		console.log(blockCircle);
 		var x = blockCircle.getAttributeNS(null, 'cx');
 		var y = blockCircle.getAttributeNS(null, 'cy');
+		console.log(x + ' ' + y);
 		var svg = blockCircle.parentNode.parentNode;
-		console.log(svg);
 		var path = new Path(svg,x,y);
 	}
 

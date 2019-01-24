@@ -3,22 +3,41 @@
 class Path{
 
 	constructor(svg,Xstart,Ystart){
-		this.lineList = [];
-		//this.clickCount = 0;
-		this.Xprev = Xstart;
-		this.Yprev = Ystart;
-		this.outFunction = ''; 
-		svg.addEventListener('click', this.addNewLine);
+		var self = this;
+		this.outFunction = '';
+		this.count = 0;
+		this.Xprev = this.Xstart;
+		this.Yprev = this.Ystart;
+		svg.addEventListener('click', this.addNewLine.bind(this), false);
 	}
 
-	set outputFunction(output){ this.outFunction = output; }
+	set outputFunction(output){this.outFunction = output;}
 	get outputFunction(){return this.outFunction;}
 
+	setInitCoordinates(x,y){
+		this.initX = x;
+		this.initY = y;
+	}
+
+	getInitCoordinates(){
+		return{
+			x: this.initX,
+			y: this.initY
+		};
+	}
+
 	addNewLine(event){
+		
+
+		if(this.count == 0){
+			
+			this.count++;
+			console.log(this.Xprev + ' ' + this.Yprev);
+		}
+			console.log(this.count);
 
 		if(event.target.getAttribute('id') == 'svg'){
 			var currentPoint = Utils.getMousePosition(event);
-
 			var Xcurrent = currentPoint.x; var Ycurrent = currentPoint.y;
 
 			var start = {x: this.Xprev, y: this.Yprev};
