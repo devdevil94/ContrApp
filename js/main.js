@@ -5,8 +5,12 @@ var svg = new SVG(SVG_WIDTH, SVG_HEIGHT).getSVG();
 //Utils.createArrowend(svg);
 /////////////////////////////////////
 
-var block = new Block(50,50);
-block.create(svg);
+// var block = new Block(50,50);
+// block.create(svg);
 
-var block2 = new Block(150,150);
-block2.create(svg);
+// var block2 = new Block(150,150);
+// block2.create(svg);
+
+var mul = new Multiplier();
+
+console.log(mul.determineOutput());
