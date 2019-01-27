@@ -1,0 +1,26 @@
+{
+  "name": "contrapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --mode development --entry ./js/main.js --output ./js/bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devdevil94/ContrApp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devdevil94/ContrApp/issues"
+  },
+  "homepage": "https://github.com/devdevil94/ContrApp#readme",
+  "devDependencies": {
+    "webpack-cli": "^3.2.1"
+  }
+}

@@ -9,6 +9,6 @@ export class SVG{
 	}
 
 	getSVG(){return this.svg;}
-}
+};
 
 
