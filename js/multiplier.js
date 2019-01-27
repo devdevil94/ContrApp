@@ -12,11 +12,7 @@ class Multiplier{
 	setInput2(input2){this.input2 = input2;}
 
 	determineOutput(){
-		//var parsedInput1 = math.parse(this.input1);
-		//var parsedInput2 = math.parse(this.input2);
-		this.output = math.multiply(this.input1, this.input2);
-		//var parsedOutput = math.parse(this.output);
-		return math.simplify(this.output).toString();
+		
 	}
 
 }

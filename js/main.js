@@ -4,13 +4,13 @@ var svg = new SVG(SVG_WIDTH, SVG_HEIGHT).getSVG();
 //Utils.createArrowhead(svg);
 //Utils.createArrowend(svg);
 /////////////////////////////////////
+var Expression = algebra.Expression;
+var Equation = algebra.Equation;
 
-// var block = new Block(50,50);
-// block.create(svg);
+var exp1 = algebra.parse('6*t');
+var exp2 = algebra.parse('2*t+t^2');
 
-// var block2 = new Block(150,150);
-// block2.create(svg);
+var eq = new Equation(exp1, exp2);
 
-var mul = new Multiplier();
-
-console.log(mul.determineOutput());
+console.log(exp1.multiply(exp2).toString());
+console.log('t = ' + eq.solveFor('t').toString());
