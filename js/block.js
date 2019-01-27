@@ -32,7 +32,9 @@ class Block{
 	}
 
 	determineOutput(){
-		this.output = this.input +  '*' + this.transFunction;  
+		var parsedInput = algebra.parse(this.input);
+		var parsedTransFunction = algebra.parse(this.transFunction);
+		this.output = parsedInput.multiply(parsedTransFunction).toString();  
 	}
 
 	getOutput(){ return this.output; }

@@ -1,6 +1,6 @@
 
 
-class SVG{
+export class SVG{
 	
 	constructor(width,height){
 		this.svg = document.querySelector('svg');
