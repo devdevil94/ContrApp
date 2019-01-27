@@ -1,9 +1,11 @@
 
 
-const SVG_WIDTH = 600;
-const SVG_HEIGHT = 600;
+var constants = {
+    SVG_WIDTH: 600,
+    SVG_HEIGHT: 600,
+    BLOCK_WIDTH: 120,
+    BLOCK_HEIGHT: 80,
+    INOUT_CIRCLE_RADIUS: 3
+};
 
-const BLOCK_WIDTH = 120;
-const BLOCK_HEIGHT = 80;
-
-const INOUT_CIRCLE_RADIUS = 3;
+export {constants};

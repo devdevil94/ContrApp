@@ -86,6 +86,29 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./js/block.js":
+/*!*********************!*\
+  !*** ./js/block.js ***!
+  \*********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("\r\nclass Block{\r\n\r\n\tconstructor(x,y){\r\n\t\tthis.x = x;\r\n\t\tthis.y = y;\r\n\t\tthis.rect = null;\r\n\r\n\t\tthis.input = 't';\r\n\t\tthis.output = '';\r\n\t\tthis.transFunction = 't';\r\n\r\n\t}\r\n\r\n\tcreate(svg){\r\n\t\tthis.rect = new Rectangle(this.x,this.y,BLOCK_WIDTH,BLOCK_HEIGHT);\r\n\t\tthis.rect.draw(svg);\r\n\t\tthis.rect.setFunction(this.transFunction);\r\n\r\n\t\t//var blockCircles = this.rect.getInOutCircles();\r\n\t\t// for(var circle in blockCircles)\r\n\t\t// \tblockCircles[circle].addEventListener('click', this.createPath);\r\n\t}\r\n\r\n\tcreatePath(event){\r\n\t\tvar blockCircle = event.target;\r\n\t\tvar x = blockCircle.getAttributeNS(null, 'cx');\r\n\t\tvar y = blockCircle.getAttributeNS(null, 'cy');\r\n\t\tconsole.log(x + ' ' + y);\r\n\t\tvar svg = blockCircle.parentNode.parentNode;\r\n\t\tvar path = new Path(svg,x,y);\r\n\t}\r\n\r\n\tdetermineOutput(){\r\n\t\tvar parsedInput = algebra.parse(this.input);\r\n\t\tvar parsedTransFunction = algebra.parse(this.transFunction);\r\n\t\tthis.output = parsedInput.multiply(parsedTransFunction).toString();  \r\n\t}\r\n\r\n\tgetOutput(){ return this.output; }\r\n\r\n\tsetInput(input){ this.input = input; }\r\n\r\n\tsetTransferFunction(txt){\r\n\t\tthis.transFunction = txt;\r\n\t\tthis.rect.setFunction(this.transFunction);\r\n\t}\r\n}\n\n//# sourceURL=webpack:///./js/block.js?");
+
+/***/ }),
+
+/***/ "./js/constants.js":
+/*!*************************!*\
+  !*** ./js/constants.js ***!
+  \*************************/
+/*! exports provided: constants */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"constants\", function() { return constants; });\n\r\n\r\nvar constants = {\r\n    SVG_WIDTH: 600,\r\n    SVG_HEIGHT: 600,\r\n    BLOCK_WIDTH: 120,\r\n    BLOCK_HEIGHT: 80,\r\n    INOUT_CIRCLE_RADIUS: 3\r\n};\r\n\r\n\n\n//# sourceURL=webpack:///./js/constants.js?");
+
+/***/ }),
+
 /***/ "./js/main.js":
 /*!********************!*\
   !*** ./js/main.js ***!
@@ -94,7 +117,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _svg_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./svg.js */ \"./js/svg.js\");\n\r\n//Important functions/objects to call\r\n\r\n\r\n\r\nvar svg = new _svg_js__WEBPACK_IMPORTED_MODULE_0__[\"SVG\"](SVG_WIDTH, SVG_HEIGHT).getSVG();\r\n//Utils.createArrowhead(svg);\r\n//Utils.createArrowend(svg);\r\n/////////////////////////////////////\r\nvar Algebrite = __webpack_require__(!(function webpackMissingModule() { var e = new Error(\"Cannot find module '../lib/node_modules/algebrite'\"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));\r\n\r\nconsole.log(Algebrite.eval('t + t + t').toString());\r\n\n\n//# sourceURL=webpack:///./js/main.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _svg_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./svg.js */ \"./js/svg.js\");\n/* harmony import */ var _block_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./block.js */ \"./js/block.js\");\n/* harmony import */ var _block_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_block_js__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _constants_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./constants.js */ \"./js/constants.js\");\n//Imports\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n//Important functions/objects to call\r\nvar svg = new _svg_js__WEBPACK_IMPORTED_MODULE_0__[\"SVG\"](_constants_js__WEBPACK_IMPORTED_MODULE_2__[\"constants\"].SVG_WIDTH, _constants_js__WEBPACK_IMPORTED_MODULE_2__[\"constants\"].SVG_HEIGHT).getSVG();\r\n//Utils.createArrowhead(svg);\r\n//Utils.createArrowend(svg);\r\n/////////////////////////////////////\r\n\r\n\r\nvar block = new _block_js__WEBPACK_IMPORTED_MODULE_1__[\"Block\"](_constants_js__WEBPACK_IMPORTED_MODULE_2__[\"constants\"].BLOCK_WIDTH, _constants_js__WEBPACK_IMPORTED_MODULE_2__[\"constants\"].BLOCK_HEIGHT);\r\nblock.create(svg);\n\n//# sourceURL=webpack:///./js/main.js?");
 
 /***/ }),
 
