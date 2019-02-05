@@ -8,8 +8,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack-dev-server --mode development --entry ./js/main.js --output ./js/bundle.js",
-    "start:dev": "webpack-dev-server"
+    "build": "webpack-dev-server --mode development --entry ./src/main.js --output ./src/bundle.js"
+    
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,10 @@
   },
   "homepage": "https://github.com/devdevil94/ContrApp#readme",
   "devDependencies": {
+    "webpack": "^4.29.1",
     "webpack-cli": "^3.2.1",
-    "webpack-dev-server": "^3.1.14"
-  }
+    "webpack-dev-server": "^3.1.14",
+    "webpack-hot-middleware": "^2.24.3"
+  },
+  "dependencies": {}
 }
