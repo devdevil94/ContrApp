@@ -1,7 +1,7 @@
 //Imports
-import { SVG } from './src/svg.js';
-import { Block } from './src/block.js';
-import { constants } from './src/constants.js';
+import { SVG } from '../dist/js/svg.js';
+import { Block } from '../dist/js/block.js';
+import { constants } from '../dist/js/constants.js';
 
 
 
