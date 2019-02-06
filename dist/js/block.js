@@ -1,5 +1,9 @@
 
-module.exports = class Block{
+import Rectangle from './rectangle';
+import {constants, Utils} from './utils';
+
+
+export default class Block{
 
 	constructor(x,y){
 		this.x = x;
@@ -13,7 +17,7 @@ module.exports = class Block{
 	}
 
 	create(svg){
-		this.rect = new Rectangle(this.x,this.y,BLOCK_WIDTH,BLOCK_HEIGHT);
+		this.rect = new Rectangle(this.x,this.y,constants.BLOCK_WIDTH,constants.BLOCK_HEIGHT);
 		this.rect.draw(svg);
 		this.rect.setFunction(this.transFunction);
 

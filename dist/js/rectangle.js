@@ -1,5 +1,8 @@
 
-module.exports = class Rectangle{
+import {constants, Utils} from './utils';
+import math from 'mathjs';
+
+export default class Rectangle{
 
 	//TODO: make the rectangle resize itself depending on the text inside it
 	constructor(x,y,w,h){
@@ -47,7 +50,7 @@ module.exports = class Rectangle{
 		Utils.setSvgElementAttributes(this.topCircle, {
 			'cx': this.w/2,
 			'cy': 0,
-			'r': INOUT_CIRCLE_RADIUS,
+			'r': constants.INOUT_CIRCLE_RADIUS,
 			'stroke': 'none',
 			'fill': '#000'
 		});
@@ -55,7 +58,7 @@ module.exports = class Rectangle{
 		Utils.setSvgElementAttributes(this.bottomCircle, {
 			'cx': this.w/2,
 			'cy': this.h,
-			'r': INOUT_CIRCLE_RADIUS,
+			'r': constants.INOUT_CIRCLE_RADIUS,
 			'stroke': 'none',
 			'fill': '#000'
 		});
@@ -63,7 +66,7 @@ module.exports = class Rectangle{
 		Utils.setSvgElementAttributes(this.rightCircle, {
 			'cx': 0,
 			'cy': this.h/2,
-			'r': INOUT_CIRCLE_RADIUS,
+			'r': constants.INOUT_CIRCLE_RADIUS,
 			'stroke': 'none',
 			'fill': '#000'
 		});
@@ -71,7 +74,7 @@ module.exports = class Rectangle{
 		Utils.setSvgElementAttributes(this.leftCircle, {
 			'cx': this.w,
 			'cy': this.h/2,
-			'r': INOUT_CIRCLE_RADIUS,
+			'r': constants.INOUT_CIRCLE_RADIUS,
 			'stroke': 'none',
 			'fill': '#000'
 		});

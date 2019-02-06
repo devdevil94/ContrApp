@@ -12,12 +12,51 @@ module.exports = {
     },
     devServer: {contentBase: 'dist'},
     module:{
-        rules: [
+        rules: 
+        [
             {
                 test: /\.css$/,
-                use: [
+                use: 
+                [
                     {loader: 'style-loader'},
                     {loader: 'css-loader'}
+                ]
+            },
+            {
+                test: /\.html$/,
+                use: 
+                [
+                    {
+                        loader: 'file-loader',
+                        options: {name: '[name].html'}
+                    },
+                    {loader: 'extract-loader'},
+                    {
+                        loader: 'html-loader',
+                        options: 
+                        {
+                            attrs: ['img:src']
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.svg$/,
+                use: 
+                [
+                    {
+                        loader: 'url-loader'
+                    }
+                ]
+            },
+            {
+                test: /\.(jpg|gif|png)$/,
+                use: 
+                [   
+                    {
+                        loader: 'file-loader',
+                        options: {name: 'images/[name].[ext]'}
+                    }
                 ]
             }
         ]

@@ -1,7 +1,9 @@
 //Imports
-import { SVG } from '../dist/js/svg.js';
-import { Block } from '../dist/js/block.js';
-import { constants } from '../dist/js/constants.js';
+import SVG from '../dist/js/svg';
+import Block from '../dist/js/block';
+import {constants, Utils} from '../dist/js/utils';
+require('./style.css');
+require('./index.html');
 
 
 

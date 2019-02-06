@@ -1,0 +1,39 @@
+
+
+body{
+	margin: 0;
+}
+
+.draggable {
+  cursor: move;
+}
+
+svg{
+	border: 1px solid black;
+}
+
+svg g circle:hover{
+	fill: rgb(76, 0, 255);
+}
+
+foreignObject {
+	pointer-events: none;
+}
+
+.latex-img{
+	width: 40px;
+	height: 20px;
+}
+
+.latex-span-frac{
+	width: 40px;
+	height: 40px;
+}
+
+#output{
+	padding-top: 50px;
+}
+
+#function-edit{
+	padding-top: 50px;
+}

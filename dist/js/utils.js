@@ -1,5 +1,4 @@
-
-module.exports = class Utils{
+class Utils{
 	
 	static getMousePosition(event) {
 		var CTM = svg.getScreenCTM();
@@ -68,3 +67,13 @@ module.exports = class Utils{
 		svg.appendChild(marker);
 	}
 };
+
+var constants = {
+    SVG_WIDTH: 600,
+    SVG_HEIGHT: 600,
+    BLOCK_WIDTH: 120,
+    BLOCK_HEIGHT: 80,
+    INOUT_CIRCLE_RADIUS: 3
+};
+
+export {constants, Utils};

@@ -1,6 +1,6 @@
 
 
-module.exports = class SVG{
+export default class SVG{
 	
 	constructor(width,height){
 		this.svg = document.querySelector('svg');
