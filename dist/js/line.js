@@ -46,7 +46,6 @@ class Line{
 		//this.square.addEventListener('mouseup', this.endDrag);
 		//this.square.addEventListener('mouseleave', this.endDrag);
 
-
 		Utils.setSvgElementAttributes(this.circle, {
 			'cx': this.startX,
 			'cy': this.startY,
