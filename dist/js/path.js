@@ -1,5 +1,8 @@
 
-module.exports = class Path{
+import Line from './line';
+import {constants, Utils} from './utils';
+
+export default class Path{
 
 	constructor(svg,Xstart,Ystart){
 		var self = this;
