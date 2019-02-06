@@ -2,6 +2,8 @@
 import SVG from '../dist/js/svg';
 import Block from '../dist/js/block';
 import {constants, Utils} from '../dist/js/utils';
+import 'bootstrap/dist/css/bootstrap.css';
+
 require('./style.css');
 require('./index.html');
 
