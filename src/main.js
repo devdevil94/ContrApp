@@ -18,7 +18,7 @@ require('./index.html');
 //////////////////////////////////////
 
 var mul = new Multiplier();
-mul.setInput1('(t+3)');
+mul.setInput1('t+3');
 mul.setInput2('1/(6*t^2+3)');
 mul.calcOutput();
 
