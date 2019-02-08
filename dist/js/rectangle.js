@@ -2,14 +2,11 @@
 import {constants, Utils} from './utils';
 import math from 'mathjs';
 
-export default class Rectangle{
+export default class BlockShape{
 
 	//TODO: make the rectangle resize itself depending on the text inside it
 	constructor(x,y,w,h){
-		this.x = x;
-		this.y = y;
-		this.w = w;
-		this.h = h;
+		this.x = x; this.y = y; this.w = w; this.h = h;
 		this.offset= 0;
 		this.dragging = false;
 		this.rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
@@ -23,7 +20,6 @@ export default class Rectangle{
 	}
 
 	draw(svg){
-
 		this.createRect();
 		this.createText();
 		this.createInOutCircles(svg);

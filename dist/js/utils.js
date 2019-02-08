@@ -73,7 +73,8 @@ var constants = {
     SVG_HEIGHT: 600,
     BLOCK_WIDTH: 120,
     BLOCK_HEIGHT: 80,
-    INOUT_CIRCLE_RADIUS: 3
+	INOUT_CIRCLE_RADIUS: 3,
+	MULTIPLIER_SQUARE_SIDE: 50
 };
 
 export {constants, Utils};
