@@ -1,10 +1,8 @@
 
-//const Algebrite = require('algebrite');
-const cq = require('coffeequate');
 
-export default class Multiplier{
-	
-	constructor(){
+export default class Adder{
+
+    constructor(){
 		this.input1 = '';
 		this.input2 = '';
 		this.output = '';
@@ -19,7 +17,7 @@ export default class Multiplier{
 	}
 	getOutput(){return this.output;}
 	calcOutput(){
-		var outputExp = cq(this.input1 + '*' + this.input2).simplify().toString();
+		var outputExp = cq(this.input1 + '+' + this.input2).toString();
 		this.output = outputExp.replace(/\*\*/g, '^');
 	}
 };
