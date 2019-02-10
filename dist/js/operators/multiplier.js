@@ -51,12 +51,23 @@ class MultiplierShape{
 		translate.setTranslate(this.x, this.y);
 		this.container.transform.baseVal.insertItemBefore(translate, 0);
 
-		this.container.className.baseVal = 'draggable plant';
+		this.container.className.baseVal = 'draggable';
 
-		this.container.addEventListener('mousedown', this.startDrag);
-		this.container.addEventListener('mousemove', this.drag);
-		this.container.addEventListener('mouseup', this.endDrag);
-		this.container.addEventListener('mouseleave', this.endDrag);
+		this.container.addEventListener('mousedown', (event)=>{
+			console.log(this.getDragging());
+			if(!this.getDragging()){
+				this.offset = Utils.startDrag(event);
+				this.setDragging(true);
+			}
+			
+		});
+		this.container.addEventListener('mousemove', (event)=>{
+			if(this.getDragging()){
+				Utils.drag(event, this.offset);
+			}
+		});
+		this.container.addEventListener('mouseup', this.setDragging(false));
+		this.container.addEventListener('mouseleave', this.setDragging(false));
 
 		svg.appendChild(this.container);
 	}
@@ -68,11 +79,6 @@ class MultiplierShape{
 			'stroke': '#000',
 			'fill': 'white'
 		});
-
-		// this.rect.addEventListener('mousedown', this.startDrag);
-		// this.rect.addEventListener('mousemove', this.drag);
-		// this.rect.addEventListener('mouseup', this.endDrag);
-		// this.rect.addEventListener('mouseleave', this.endDrag);
 		
 		this.container.appendChild(this.rect);
 	}
@@ -99,11 +105,6 @@ class MultiplierShape{
 		this.container.appendChild(this.line1);
 		this.container.appendChild(this.line2);
 
-		// this.linesGroup.addEventListener('mousedown', this.startDrag);
-		// this.linesGroup.addEventListener('mousemove', this.drag);
-		// this.linesGroup.addEventListener('mouseup', this.endDrag);
-		// this.linesGroup.addEventListener('mouseleave', this.endDrag);
-
 	}
 
 	createInOutCircles(svg){	
@@ -127,43 +128,8 @@ class MultiplierShape{
 		this.container.appendChild(this.leftCircle);
 	}
 
-	startDrag(event) {
-		if(!this.dragging){
-			this.offset = Utils.getMousePosition(event);
-
-			var g = event.target.parentNode;
-			var svg = g.parentNode;
-			var transforms = g.transform.baseVal;
-
-			if (transforms.length == 0 || transforms.getItem(0).type != SVGTransform.SVG_TRANSFORM_TRANSLATE){
-				var translate = svg.createSVGTransform();
-				translate.setTranslate(0, 0);
-				g.transform.baseVal.insertItemBefore(translate, 0);
-			}
-
-    		this.offset.x -= transforms.getItem(0).matrix.e;
-    		this.offset.y -= transforms.getItem(0).matrix.f;
-
-		    this.dragging = true;
-		}
-	}
-
-	drag(event) {
-		if(this.dragging){
-		    event.preventDefault();
-
-		    var coord = Utils.getMousePosition(event);
-
-		    var g = event.target.parentNode;
-		    var transforms = g.transform.baseVal;
-		    var translate = transforms.getItem(0);
-
-			translate.setTranslate(coord.x - this.offset.x, coord.y - this.offset.y);
-		}
-	}
-
-	endDrag() { this.dragging = false; }
-
+	setDragging(dragging){this.dragging = dragging; console.log('set drag');}
+	getDragging(){return this.dragging;}
 };
 
 export {MultiplierShape};

@@ -15,6 +15,39 @@ class Utils{
     	}
 	}
 
+	static startDrag(event) {
+		
+		var offset = Utils.getMousePosition(event);
+
+		var g = event.target.parentNode;
+		var svg = g.parentNode;
+		var transforms = g.transform.baseVal;
+		
+
+		if (transforms.length == 0 || transforms.getItem(0).type != SVGTransform.SVG_TRANSFORM_TRANSLATE){
+			var translate = svg.createSVGTransform();
+			translate.setTranslate(0, 0);
+			g.transform.baseVal.insertItemBefore(translate, 0);
+		}
+
+		offset.x -= transforms.getItem(0).matrix.e;
+		offset.y -= transforms.getItem(0).matrix.f;
+
+		return offset;
+	}
+
+	static drag(event, offset) {
+		event.preventDefault();
+
+		var coord = Utils.getMousePosition(event);
+
+		var g = event.target.parentNode;
+		var transforms = g.transform.baseVal;
+		var translate = transforms.getItem(0);
+
+		translate.setTranslate(coord.x - offset.x, coord.y - offset.y);
+	}
+
 	static createArrowhead(svg){
 		var defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
 		var marker = document.createElementNS('http://www.w3.org/2000/svg', 'marker');

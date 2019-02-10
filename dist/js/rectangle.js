@@ -28,7 +28,7 @@ export default class BlockShape{
 		translate.setTranslate(this.x, this.y);
 		this.container.transform.baseVal.insertItemBefore(translate, 0);
 
-		this.container.className.baseVal = 'draggable plant';
+		this.container.className.baseVal = 'draggable';
 
 		svg.appendChild(this.container);
 	}
