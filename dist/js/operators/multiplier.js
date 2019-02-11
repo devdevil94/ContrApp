@@ -53,21 +53,29 @@ class MultiplierShape{
 
 		this.container.className.baseVal = 'draggable';
 
-		this.container.addEventListener('mousedown', (event)=>{
-			console.log(this.getDragging());
+		this.container.addEventListener('mousedown', (event) => {
 			if(!this.getDragging()){
 				this.offset = Utils.startDrag(event);
 				this.setDragging(true);
+				console.log('start drag');
 			}
 			
 		});
-		this.container.addEventListener('mousemove', (event)=>{
+		this.container.addEventListener('mousemove', (event) => {
 			if(this.getDragging()){
 				Utils.drag(event, this.offset);
+				console.log('dragging');
 			}
 		});
-		this.container.addEventListener('mouseup', this.setDragging(false));
-		this.container.addEventListener('mouseleave', this.setDragging(false));
+		this.container.addEventListener('mouseup', () => { 
+			this.setDragging(false); 
+			console.log('end drag');		
+		});
+		this.container.addEventListener('mouseleave', () => {
+			this.setDragging(false);
+			console.log('end drag');		
+
+		});
 
 		svg.appendChild(this.container);
 	}
@@ -128,7 +136,7 @@ class MultiplierShape{
 		this.container.appendChild(this.leftCircle);
 	}
 
-	setDragging(dragging){this.dragging = dragging; console.log('set drag');}
+	setDragging(dragging){this.dragging = dragging;}
 	getDragging(){return this.dragging;}
 };
 

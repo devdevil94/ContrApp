@@ -16,7 +16,6 @@ class Utils{
 	}
 
 	static startDrag(event) {
-		
 		var offset = Utils.getMousePosition(event);
 
 		var g = event.target.parentNode;
@@ -36,7 +35,7 @@ class Utils{
 		return offset;
 	}
 
-	static drag(event, offset) {
+	static drag(event, offset) {		
 		event.preventDefault();
 
 		var coord = Utils.getMousePosition(event);
