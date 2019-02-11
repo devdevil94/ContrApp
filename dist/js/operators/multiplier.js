@@ -1,4 +1,5 @@
 import { constants, Utils } from '../utils';
+import InOutCircle from '../input-output-circle';
 
 //const Algebrite = require('algebrite');
 const cq = require('coffeequate');
@@ -53,29 +54,7 @@ class MultiplierShape{
 
 		this.container.className.baseVal = 'draggable';
 
-		this.container.addEventListener('mousedown', (event) => {
-			if(!this.getDragging()){
-				this.offset = Utils.startDrag(event);
-				this.setDragging(true);
-				console.log('start drag');
-			}
-			
-		});
-		this.container.addEventListener('mousemove', (event) => {
-			if(this.getDragging()){
-				Utils.drag(event, this.offset);
-				console.log('dragging');
-			}
-		});
-		this.container.addEventListener('mouseup', () => { 
-			this.setDragging(false); 
-			console.log('end drag');		
-		});
-		this.container.addEventListener('mouseleave', () => {
-			this.setDragging(false);
-			console.log('end drag');		
-
-		});
+		this.addEventListeners();
 
 		svg.appendChild(this.container);
 	}
@@ -115,25 +94,31 @@ class MultiplierShape{
 
 	}
 
-	createInOutCircles(svg){	
-		Utils.setSvgElementAttributes(this.rightCircle, {
-			'cx': 0,
-			'cy': this.s/2,
-			'r': constants.INOUT_CIRCLE_RADIUS,
-			'stroke': 'none',
-			'fill': '#000'
-		});
+	createInOutCircles(svg){
+		var leftCircle = new InOutCircle(this.s, this.s/2, this.container);
+		var rightCircle = new InOutCircle(0, this.s/2, this.container);
+	}
 
-		Utils.setSvgElementAttributes(this.leftCircle, {
-			'cx': this.s,
-			'cy': this.s/2,
-			'r': constants.INOUT_CIRCLE_RADIUS,
-			'stroke': 'none',
-			'fill': '#000'
+	addEventListeners(){
+		this.container.addEventListener('mousedown', (event) => {
+			if(!this.getDragging()){
+				this.offset = Utils.startDrag(event);
+				this.setDragging(true);
+			}
+			
 		});
+		this.container.addEventListener('mousemove', (event) => {
+			if(this.getDragging()){
+				Utils.drag(event, this.offset);
+			}
+		});
+		this.container.addEventListener('mouseup', () => { 
+			this.setDragging(false); 		
+		});
+		this.container.addEventListener('mouseleave', () => {
+			this.setDragging(false);		
 
-		this.container.appendChild(this.rightCircle);
-		this.container.appendChild(this.leftCircle);
+		});
 	}
 
 	setDragging(dragging){this.dragging = dragging;}
