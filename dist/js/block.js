@@ -13,11 +13,10 @@ export default class Block{
 		this.input = 't';
 		this.output = '';
 		this.transFunction = 't';
-
 	}
 
 	create(svg){
-		this.rect = new Rectangle(this.x,this.y,constants.BLOCK_WIDTH,constants.BLOCK_HEIGHT);
+		this.rect = new Rectangle(this.x, this.y, constants.BLOCK_WIDTH, constants.BLOCK_HEIGHT);
 		this.rect.draw(svg);
 		this.rect.setFunction(this.transFunction);
 

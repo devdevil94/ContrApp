@@ -15,7 +15,10 @@ require('./index.html');
 
 //Important functions/objects to call
 var svg = new SVG(constants.SVG_WIDTH, constants.SVG_HEIGHT).getSVG();
-//////////////////////////////////////
+/////////////////////////////////////
 
-var mulRect = new MultiplierShape(100, 100, constants.MULTIPLIER_SQUARE_SIDE);
-mulRect.draw(svg);
+// var mulRect = new MultiplierShape(100, 100, constants.MULTIPLIER_SQUARE_SIDE);
+// mulRect.draw(svg);
+
+var block = new Block(100,100);
+block.create(svg);

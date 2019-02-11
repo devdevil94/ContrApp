@@ -94,7 +94,7 @@ class MultiplierShape{
 
 	}
 
-	createInOutCircles(svg){
+	createInOutCircles(){
 		var leftCircle = new InOutCircle(this.s, this.s/2, this.container);
 		var rightCircle = new InOutCircle(0, this.s/2, this.container);
 	}

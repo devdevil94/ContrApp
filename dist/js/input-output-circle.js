@@ -4,6 +4,8 @@ import { constants, Utils } from "./utils";
 export default class InOutCircle{
 
     constructor(cx, cy, element){
+        this.selected = false;
+        
 		this.circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
 
         Utils.setSvgElementAttributes(this.circle, {
