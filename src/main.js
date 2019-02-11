@@ -3,7 +3,7 @@ import SVG from '../dist/js/svg';
 import Block from '../dist/js/block';
 import {constants, Utils} from '../dist/js/utils';
 import 'bootstrap/dist/css/bootstrap.css';
-import Multiplier, { MultiplierShape } from '../dist/js/operators/multiplier';
+import { Multiplier, MultiplierShape } from '../dist/js/operators/multiplier';
 
 require('./style.css');
 require('./index.html');

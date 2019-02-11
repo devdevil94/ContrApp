@@ -4,7 +4,6 @@ import math from 'mathjs';
 import InOutCircle from './input-output-circle';
 
 export default class BlockShape{
-
 	//TODO: make the rectangle resize itself depending on the text inside it
 	constructor(x,y,w,h){
 		this.x = x; this.y = y; this.w = w; this.h = h;
@@ -14,11 +13,10 @@ export default class BlockShape{
 		this.textElement = document.createElementNS('http://www.w3.org/2000/svg', 'foreignObject');
 		this.container = document.createElementNS('http://www.w3.org/2000/svg', 'g');
 	}
-
 	draw(svg){
 		this.createRect();
 		this.createText();
-		this.createInOutCircles(svg);
+		this.createInOutCircles();
 
 		var translate = svg.createSVGTransform();
 		translate.setTranslate(this.x, this.y);
@@ -30,17 +28,14 @@ export default class BlockShape{
 
 		svg.appendChild(this.container);
 	}
-
 	setDragging(dragging){this.dragging = dragging;}
 	getDragging(){return this.dragging;}
-
 	addEventListeners(){
 		this.container.addEventListener('mousedown', (event) => {
 			if(!this.getDragging()){
 				this.offset = Utils.startDrag(event);
 				this.setDragging(true);
 			}
-			
 		});
 		this.container.addEventListener('mousemove', (event) => {
 			if(this.getDragging()){
@@ -51,18 +46,15 @@ export default class BlockShape{
 			this.setDragging(false); 		
 		});
 		this.container.addEventListener('mouseleave', () => {
-			this.setDragging(false);		
-
+			this.setDragging(false);
 		});
 	}
-
 	createInOutCircles(){
 		var topCircle = new InOutCircle(this.w/2, 0, this.container);
 		var bottomCircle = new InOutCircle(this.w/2, this.h, this.container);
 		var rightCircle = new InOutCircle(0, this.h/2, this.container);
 		var leftCircle = new InOutCircle(this.w, this.h/2, this.container);
 	}
-
 	createRect(){
 		Utils.setSvgElementAttributes(this.rect, {
 			'width': this.w,
@@ -73,7 +65,6 @@ export default class BlockShape{
 		
 		this.container.appendChild(this.rect);
 	}
-
 	createText(){
 		//Width of the text can be modified based on the number of chars.    
 		Utils.setSvgElementAttributes(this.textElement, {
@@ -82,16 +73,11 @@ export default class BlockShape{
 		});
 		this.container.appendChild(this.textElement);
 	}
-
 	adjustFunctionPosition(){
 		//Adjust Function position when there is/are fraction(s)
 	}
-
-
 	getNumberOfFractions(){}
-
 	getContainer(){return this.container;}
-
 	setFunction(func){
 		if(this.textElement.childNodes[0]){
 			this.textElement.removeChild(this.textElement.childNodes[0]);
@@ -107,5 +93,4 @@ export default class BlockShape{
 		}
 		this.textElement.appendChild(img);
 	}
-
 };

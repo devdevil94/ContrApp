@@ -6,10 +6,15 @@ const cq = require('coffeequate');
 
 class Multiplier{
 	
-	constructor(){
+	constructor(x,y){
+		this.x = x; this.y = y;
+		this.shape = null;
 		this.input1 = '';
 		this.input2 = '';
 		this.output = '';
+	}
+	create(){
+		
 	}
 	setInput1(input1){
 		var input1Exp = input1.replace(/\^/g, '**');
@@ -98,7 +103,6 @@ class MultiplierShape{
 		var leftCircle = new InOutCircle(this.s, this.s/2, this.container);
 		var rightCircle = new InOutCircle(0, this.s/2, this.container);
 	}
-
 	addEventListeners(){
 		this.container.addEventListener('mousedown', (event) => {
 			if(!this.getDragging()){
@@ -125,4 +129,4 @@ class MultiplierShape{
 	getDragging(){return this.dragging;}
 };
 
-export {MultiplierShape};
+export {Multiplier, MultiplierShape};
