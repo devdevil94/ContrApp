@@ -14,14 +14,9 @@ export default class Line{
 		this.point = null;
 		this.func = null;
 		this.line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-		this.square = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-		this.circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-		this.lineGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
 	}
 
-	setFunctionFromOutputToInput(func){
-		this.func = func;
-	}
+	setFunctionFromOutputToInput(func){this.func = func;}
 
 	draw(svg){
 		Utils.setSvgElementAttributes(this.line, {
@@ -33,33 +28,38 @@ export default class Line{
 			'stroke-width': 2,
 		});
 
-		Utils.setSvgElementAttributes(this.square, {
-			'x': this.endX-5,
-			'y': this.endY-5,
-			'width': 10,
-			'height': 10,
-			'stroke': 'none',
-			'fill': '#000'
-		});
-
-		//this.square.addEventListener('mousedown', this.startDrag);
-		//this.square.addEventListener('mousemove', this.drag);
-		//this.square.addEventListener('mouseup', this.endDrag);
-		//this.square.addEventListener('mouseleave', this.endDrag);
-
-		Utils.setSvgElementAttributes(this.circle, {
-			'cx': this.startX,
-			'cy': this.startY,
-			'r': 5,
-			'stroke': 'none',
-			'fill': '#000'
-		});
-
-		this.lineGroup.appendChild(this.circle);
-		this.lineGroup.appendChild(this.line);
-		this.lineGroup.appendChild(this.square);
-		svg.appendChild(this.lineGroup);
+		svg.appendChild(this.line);
 	}
+
+	set startPoint(point){
+		this.startX = point.x;
+		this.startY = point.y;
+
+		Utils.setSvgElementAttributes(this.line, {'x1': this.startX, 'y1': this.startY});		
+	}
+    get startPoint(){
+		return {
+			x: this.startX, 
+			y: this.startY
+		}
+	}
+
+	set endPoint(point){
+		this.endX = point.x;
+		this.endY = point.y;
+
+		Utils.setSvgElementAttributes(this.line, {'x2': this.endX, 'y2': this.endY});
+	}
+    get endPoint(){
+		return {
+			x: this.endX, 
+			y: this.endY
+		}
+	}
+
+
+
+
 
 	startDrag(event){
 		if(!this.dragging){

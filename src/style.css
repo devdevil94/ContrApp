@@ -13,7 +13,7 @@ svg{
 }
 
 svg g circle:hover{
-	fill: rgb(137, 226, 20);
+	fill: rgb(255, 0, 0);
 }
 
 foreignObject {
