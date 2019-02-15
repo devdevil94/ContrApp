@@ -58,7 +58,7 @@ class MultiplierShape{
 		translate.setTranslate(this.x, this.y);
 		this.container.transform.baseVal.insertItemBefore(translate, 0);
 
-		this.container.className.baseVal = 'draggable';
+		this.container.className.baseVal = 'draggable block';
 
 		this.addEventListeners();
 

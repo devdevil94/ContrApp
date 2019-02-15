@@ -48,6 +48,7 @@ class BlockShape{
 		this.x = x; this.y = y; this.w = w; this.h = h;
 		this.offset= 0;
 		this.dragging = false;
+		this.inOutCircles = null;
 		this.rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
 		this.textElement = document.createElementNS('http://www.w3.org/2000/svg', 'foreignObject');
 		this.container = document.createElementNS('http://www.w3.org/2000/svg', 'g');
@@ -61,14 +62,17 @@ class BlockShape{
 		translate.setTranslate(this.x, this.y);
 		this.container.transform.baseVal.insertItemBefore(translate, 0);
 
-		this.container.className.baseVal = 'draggable';
+		this.container.className.baseVal = 'draggable block';
 
 		this.addEventListeners();
 
 		svg.appendChild(this.container);
 	}
+
+
 	setDragging(dragging){this.dragging = dragging;}
 	getDragging(){return this.dragging;}
+
 	addEventListeners(){
 		this.container.addEventListener('mousedown', (event) => {
 			if(!this.getDragging()){
@@ -88,12 +92,17 @@ class BlockShape{
 			this.setDragging(false);
 		});
 	}
+
 	createInOutCircles(){
-		var topCircle = new InOutCircle(this.w/2, 0, this.container);
-		var bottomCircle = new InOutCircle(this.w/2, this.h, this.container);
-		var rightCircle = new InOutCircle(0, this.h/2, this.container);
-		var leftCircle = new InOutCircle(this.w, this.h/2, this.container);
+		this.inOutCircles = {
+			top: new InOutCircle(this.w/2, 0, this.container),
+			bottom: new InOutCircle(this.w/2, this.h, this.container),
+			right: new InOutCircle(0, this.h/2, this.container),
+			left: new InOutCircle(this.w, this.h/2, this.container)
+		};
 	}
+	getInOutCircles(){return this.inOutCircles;}
+
 	createRect(){
 		Utils.setSvgElementAttributes(this.rect, {
 			'width': this.w,
