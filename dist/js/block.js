@@ -54,7 +54,6 @@ class BlockShape{
 		this.createRect();
 		this.createText();
 		this.createInOutCircles();
-		console.log(this.inOutCircles);
 
 		var translate = svg.createSVGTransform();
 		translate.setTranslate(this.x, this.y);
