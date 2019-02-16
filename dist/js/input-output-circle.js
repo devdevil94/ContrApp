@@ -16,24 +16,10 @@ export default class InOutCircle{
 			'fill': '#000'
         });
 
-        this.circle.addEventListener('click', () => {
-            this.setSelected(!this.getSelected());
-
-            // var svg = element.parentNode;
-            // for(var i = 0; i < svg.children.length; i++){
-            //     var svgChild = svg.children[i];
-            //     if(svgChild.classList.contains('block')){
-            //         var blockChildren = svgChild.children;
-            //         for(var j = 0; j < blockChildren.length; j++){
-                        
-            //         }
-            //     }
-            // }
-                
-        });
-
         element.appendChild(this.circle);
     }
+
+    getCircleElement(){ return this.circle;}
 
     setCircleColor(){
         if(this.selected)

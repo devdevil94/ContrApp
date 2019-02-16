@@ -17,9 +17,6 @@ import InOutCircle from './input-output-circle';
 		this.shape.draw(svg);
 		this.shape.setFunction(this.transFunction);
 
-		//var blockCircles = this.rect.getInOutCircles();
-		// for(var circle in blockCircles)
-		// 	blockCircles[circle].addEventListener('click', this.createPath);
 	}
 	createPath(event){
 		var blockCircle = event.target;
@@ -57,6 +54,7 @@ class BlockShape{
 		this.createRect();
 		this.createText();
 		this.createInOutCircles();
+		console.log(this.inOutCircles);
 
 		var translate = svg.createSVGTransform();
 		translate.setTranslate(this.x, this.y);
@@ -65,10 +63,10 @@ class BlockShape{
 		this.container.className.baseVal = 'draggable block';
 
 		this.addEventListeners();
-
+		this.addSelectedCircleEventListener();
+		
 		svg.appendChild(this.container);
 	}
-
 
 	setDragging(dragging){this.dragging = dragging;}
 	getDragging(){return this.dragging;}
@@ -102,6 +100,46 @@ class BlockShape{
 		};
 	}
 	getInOutCircles(){return this.inOutCircles;}
+
+	addSelectedCircleEventListener(){
+		var top = this.inOutCircles.top;
+		var bottom = this.inOutCircles.bottom;
+		var right = this.inOutCircles.right;
+		var left = this.inOutCircles.left;
+		
+		// for(var c in this.inOutCircles){
+		// 	var circle = this.inOutCircles[c];
+		// 	console.log(circle);
+		// 	circle.getCircleElement().addEventListener('click', () =>{
+		// 		this.deselectAllCircles();
+		// 		this.getInOutCircles().circle.setSelected(!this.getInOutCircles().circle.getSelected());
+		// 	});
+		// }
+
+		top.getCircleElement().addEventListener('click', () => {
+			this.deselectAllCircles();
+			this.getInOutCircles().top.setSelected(!this.getInOutCircles().top.getSelected());
+		});
+		bottom.getCircleElement().addEventListener('click', () => {
+			this.deselectAllCircles();
+			this.getInOutCircles().bottom.setSelected(!this.getInOutCircles().bottom.getSelected());
+		});
+		right.getCircleElement().addEventListener('click', () => {
+			this.deselectAllCircles();
+			this.getInOutCircles().right.setSelected(!this.getInOutCircles().right.getSelected());
+		});
+		left.getCircleElement().addEventListener('click', () => {
+			this.deselectAllCircles();
+			this.getInOutCircles().left.setSelected(!this.getInOutCircles().left.getSelected());
+		});
+	}
+
+	deselectAllCircles(){
+		console.log('all deselected');
+		for(var circle in this.inOutCircles){
+			this.inOutCircles[circle].setSelected(false);
+		}
+	}
 
 	createRect(){
 		Utils.setSvgElementAttributes(this.rect, {

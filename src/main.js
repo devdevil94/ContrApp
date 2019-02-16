@@ -20,5 +20,5 @@ var svg = new SVG(constants.SVG_WIDTH, constants.SVG_HEIGHT).getSVG();
 var mulRect = new Multiplier(100, 100, constants.MULTIPLIER_SQUARE_SIDE);
 mulRect.create(svg);
 
-var block = new Block(100,200);
+var block = new Block(200,200);
 block.create(svg);
