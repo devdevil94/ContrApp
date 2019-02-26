@@ -3,6 +3,8 @@ import {constants, Utils} from './utils';
 import math from 'mathjs';
 import InOutCircle from './input-output-circle';
 
+const katex = require('katex');
+
  export default class Block{
 	constructor(x,y){
 		this.x = x; this.y = y;
@@ -15,8 +17,8 @@ import InOutCircle from './input-output-circle';
 	create(svg){
 		this.shape = new BlockShape(this.x, this.y, constants.BLOCK_WIDTH, constants.BLOCK_HEIGHT);
 		this.shape.draw(svg);
+		console.log(this.shape);		
 		this.shape.setFunction(this.transFunction);
-
 	}
 	createPath(event){
 		var blockCircle = event.target;
@@ -35,7 +37,7 @@ import InOutCircle from './input-output-circle';
 	setInput(input){ this.input = input; }
 	setTransferFunction(txt){
 		this.transFunction = txt;
-		this.rect.setFunction(this.transFunction);
+		this.shape.setFunction(this.transFunction);
 	}
 };
 
@@ -163,19 +165,25 @@ class BlockShape{
 	}
 	getNumberOfFractions(){}
 	getContainer(){return this.container;}
+	
 	setFunction(func){
 		if(this.textElement.childNodes[0]){
 			this.textElement.removeChild(this.textElement.childNodes[0]);
 		}
 
-		var img = document.createElement('img');
-		img.src = 'http://latex.codecogs.com/svg.latex?' + math.parse(func).toTex();
+		var functionDiv = document.createElement('span');
+		var funcTex = math.parse(func).toTex();
 
-		if(func.includes('/')){
-			img.className = 'latex-img-frac';
-		}else{
-			img.className = 'latex-img';
-		}
-		this.textElement.appendChild(img);
+		katex.render(funcTex, functionDiv);
+		console.log(funcTex);
+		// var img = document.createElement('img');
+		// img.src = 'http://latex.codecogs.com/svg.latex?' + math.parse(func).toTex();
+
+		// if(func.includes('/')){
+		// 	img.className = 'latex-img-frac';
+		// }else{
+		// 	img.className = 'latex-img';
+		// }
+		this.textElement.appendChild(functionDiv);
 	}
 };
