@@ -1,4 +1,4 @@
-
+import 'katex/dist/contrib/auto-render';
 
 export default class SVG{
 	
@@ -6,9 +6,11 @@ export default class SVG{
 		this.svg = document.querySelector('svg');
 		this.svg.style.width = width;
 		this.svg.style.height = height;
+
+		document.addEventListener('DOMContentLoaded', ()=>{renderMathInElement(document.body, {});});
 	}
 
-	getSVG(){return this.svg;}
+	getElement(){return this.svg;}
 };
 
 

@@ -2,7 +2,6 @@
 import {constants, Utils} from './utils';
 import math from 'mathjs';
 import InOutCircle from './input-output-circle';
-
 const katex = require('katex');
 
  export default class Block{
