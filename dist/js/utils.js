@@ -1,4 +1,4 @@
-class Utils {
+export default class Utils {
   static getMousePosition(event) {
     var CTM = svg.getScreenCTM();
 
