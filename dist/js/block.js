@@ -1,5 +1,5 @@
 import constants from "./Constants";
-import Utils from "./utils";
+import Utils from "./Utils";
 import BlockContainer from "./BlockContainer";
 
 export default class Block {

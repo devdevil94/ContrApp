@@ -1,10 +1,10 @@
 //////////////////////////Imports\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 import "bootstrap/dist/css/bootstrap.css";
-// import 'katex/dist/katex.css';
+
 import SVG from "../dist/js/svg";
 import Block from "../dist/js/Block";
 import constants from "../dist/js/Constants";
-import Multiplier from "../dist/js/operators/multiplier";
+import Multiplier from "../dist/js/operators/Multiplier";
 const math = require("mathjs");
 require("./style.css");
 require("../dist/index.html");

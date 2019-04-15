@@ -1,4 +1,4 @@
-import Utils from "./utils";
+import Utils from "./Utils";
 import constants from "./Constants";
 
 export default class InOutCircle {

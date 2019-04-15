@@ -1,6 +1,6 @@
 import math from "mathjs";
-import InOutCircle from "./input-output-circle";
-import Utils from "./utils";
+import InOutCircle from "./InputOutputCircle";
+import Utils from "./Utils";
 
 export default class BlockContainer {
   //TODO: make the rectangle resize itself depending on the text inside it

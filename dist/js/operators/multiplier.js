@@ -1,6 +1,4 @@
 import constants from "../Constants";
-import InOutCircle from "../input-output-circle";
-
 import MultiplierContainer from "../MultiplierContainer";
 
 //const Algebrite = require('algebrite');
