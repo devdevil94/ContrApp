@@ -1,4 +1,4 @@
-import 'katex/dist/contrib/auto-render';
+
 
 export default class SVG{
 	

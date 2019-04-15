@@ -4,7 +4,7 @@ import math from 'mathjs';
 import InOutCircle from './input-output-circle';
 const katex = require('katex');
 
- export default class Block{
+export default class Block{
 	constructor(x,y){
 		this.x = x; this.y = y;
 		this.shape = null;
@@ -170,7 +170,8 @@ class BlockShape{
 			this.textElement.removeChild(this.textElement.childNodes[0]);
 		}
 
-		var functionDiv = document.createElement('span');
+		var functionDiv = document.createElement('div');
+		functionDiv.setAttribute('id', 'functionDiv');
 		var funcTex = math.parse(func).toTex();
 
 		katex.render(funcTex, functionDiv);
