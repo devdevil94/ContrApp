@@ -25,6 +25,7 @@ export default class BlockContainer {
   draw(svg) {
     this.createRect();
     this.createText();
+
     this.createInOutCircles();
 
     var translate = svg.createSVGTransform();
@@ -139,7 +140,9 @@ export default class BlockContainer {
     //Width of the text can be modified based on the number of chars.
     Utils.setSvgElementAttributes(this.textElement, {
       x: 0.33 * this.w,
-      y: 0.25 * this.h
+      y: 0.25 * this.h,
+      width: this.w,
+      height: this.h
     });
     this.container.appendChild(this.textElement);
   }
@@ -153,22 +156,15 @@ export default class BlockContainer {
 
   setFunction(func) {
     if (this.textElement.childNodes[0]) {
+      console.log(this.textElement.childNodes[0]);
       this.textElement.removeChild(this.textElement.childNodes[0]);
     }
 
     var functionDiv = document.createElement("div");
-    var funcTex = math.parse(func).toTex();
+    var funcTex = "$$" + math.parse(func).toTex() + "$$";
 
-    // katex.render(funcTex, functionDiv);
-    console.log(funcTex);
-    // var img = document.createElement('img');
-    // img.src = 'http://latex.codecogs.com/svg.latex?' + math.parse(func).toTex();
-
-    // if(func.includes('/')){
-    // 	img.className = 'latex-img-frac';
-    // }else{
-    // 	img.className = 'latex-img';
-    // }
+    functionDiv.innerHTML = funcTex;
     this.textElement.appendChild(functionDiv);
+    console.log(this.textElement.childNodes[0]);
   }
 }

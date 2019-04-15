@@ -5,7 +5,9 @@ import SVG from "../dist/js/svg";
 import Block from "../dist/js/Block";
 import constants from "../dist/js/Constants";
 import Multiplier from "../dist/js/operators/Multiplier";
+import Utils from "../dist/js/Utils";
 const math = require("mathjs");
+const katex = require("katex");
 require("./style.css");
 require("../dist/index.html");
 ///////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -20,10 +22,15 @@ mulRect.create(svgElement);
 
 var block = new Block(200, 200);
 block.create(svgElement);
-block.setTransferFunction("t^2 * (t+3)");
+block.setTransferFunction("t^2");
 
-katex.render(
-  math.parse("t^2 * (t+3)").toTex(),
-  document.getElementById("hello"),
-  { throwOnError: false }
-);
+const eq = math.parse("(t^2)*(t+3)").toTex();
+document.getElementById("hip").innerText = "$$" + eq + "$$";
+
+// var textElement = document.createElementNS(
+//   "http://www.w3.org/2000/svg",
+//   "foreignObject"
+// );
+// Utils.setSvgElementAttributes(textElement, { width: 160, height: 120 });
+// textElement.appendChild(document.getElementById("hip"));
+// svgElement.appendChild(textElement);
