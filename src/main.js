@@ -2,8 +2,8 @@
 import "bootstrap/dist/css/bootstrap.css";
 // import 'katex/dist/katex.css';
 import SVG from "../dist/js/svg";
-import Block from "../dist/js/block";
-import constants from "../dist/js/constants";
+import Block from "../dist/js/Block";
+import constants from "../dist/js/Constants";
 import Multiplier from "../dist/js/operators/multiplier";
 const math = require("mathjs");
 require("./style.css");
