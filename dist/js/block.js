@@ -53,7 +53,7 @@ export default class Block {
   getContainer() {
     return this.container;
   }
-  getSelected() {
+  isSelected() {
     return this.selected;
   }
 }

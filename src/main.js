@@ -16,15 +16,15 @@ require("../dist/index.html");
 var svg = new SVG(constants.SVG_WIDTH, constants.SVG_HEIGHT);
 var svgElement = svg.getElement();
 
-MathJax.Hub.Config({
-  skipStartupTypeset: true,
-  extensions: ["tex2jax.js", "TeX/AMSmath.js"],
-  jax: ["input/TeX", "output/HTML-CSS"],
-  tex2jax: {
-    inlineMath: [["$", "$"]],
-    processEscapes: true
-  }
-});
+// MathJax.Hub.Config({
+//   skipStartupTypeset: true,
+//   extensions: ["tex2jax.js", "TeX/AMSmath.js"],
+//   jax: ["input/TeX", "output/HTML-CSS"],
+//   tex2jax: {
+//     inlineMath: [["$", "$"]],
+//     processEscapes: true
+//   }
+// });
 
 function startTypeSetting() {
   var HUB = MathJax.Hub;
@@ -32,6 +32,8 @@ function startTypeSetting() {
 
   functions.forEach((func) => {
     HUB.Queue(["Typeset", HUB, func]);
+    //Maybe resizing can be done after this step
+    console.log(func.offsetWidth + " " + func.offsetHeight);
   });
 }
 ///////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -42,6 +44,20 @@ var blockBtn = document.getElementById("block-btn");
 blockBtn.addEventListener("click", () => {
   componentType = "block";
   blockBtn.classList.add("selected-btn");
+});
+
+var editBtn = document.getElementById("edit-Btn");
+editBtn.addEventListener("click", () => {
+  var functionInput = document.getElementById("tFunction-input");
+  var components = svg.getComponents();
+  var selectedComponent = null;
+
+  for (var i = 0; i < components.length; i++) {
+    if (components[i].isSelected()) {
+      components[i].setTransferFunction(functionInput.nodeValue);
+      break;
+    }
+  }
 });
 
 /********Adding Components To SVG********/
@@ -69,10 +85,18 @@ svgElement.addEventListener("click", (event) => {
     const x = Utils.getMousePosition(event).x;
     const y = Utils.getMousePosition(event).y;
 
-    svg.deselectAllComponents();
+    // svg.deselectAllComponents();
 
     var newBlock = new Block(x, y);
     newBlock.create(svgElement);
+
+    newBlock
+      .getContainer()
+      .getRect()
+      .addEventListener("click", () => {
+        svg.deselectAllComponents();
+        newBlock.setSelected(true);
+      });
 
     svg.addComponent(newBlock);
     startTypeSetting();
@@ -80,12 +104,3 @@ svgElement.addEventListener("click", (event) => {
 });
 
 /********Components Event Listeners********/
-svg.getComponents().forEach((component) => {
-  component
-    .getContainer()
-    .getRect()
-    .addEventListener("click", () => {
-      svg.deselectAllComponents();
-      component.setSelected(true);
-    });
-});
