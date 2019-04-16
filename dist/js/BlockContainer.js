@@ -34,7 +34,7 @@ export default class BlockContainer {
 
     this.container.className.baseVal = "draggable block";
 
-    Utils.setSvgElementAttributes(this.container, { stroke: "#000" });
+    // Utils.setSvgElementAttributes(this.container, { stroke: "#000" });
     this.addEventListeners();
     this.addSelectedCircleEventListener();
 
@@ -156,7 +156,17 @@ export default class BlockContainer {
   getContainer() {
     return this.container;
   }
-
+  setStrokeColor(selected) {
+    console.log(selected);
+    if (selected)
+      Utils.setSvgElementAttributes(this.rect, {
+        stroke: "#00f"
+      });
+    else
+      Utils.setSvgElementAttributes(this.rect, {
+        stroke: "#000"
+      });
+  }
   setFunction(func) {
     if (this.textElement.childNodes[0]) {
       this.textElement.removeChild(this.textElement.childNodes[0]);

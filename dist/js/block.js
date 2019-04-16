@@ -7,7 +7,7 @@ export default class Block {
     this.x = x;
     this.y = y;
     this.container = null;
-    this.selected = true;
+    this.selected = false;
     this.input = "t";
     this.output = "";
     this.transFunction = "t";
@@ -20,8 +20,12 @@ export default class Block {
       constants.BLOCK_HEIGHT
     );
     this.container.draw(svg);
-    console.log(this.container);
+    this.container.getRect().addEventListener("click", () => {
+      this.setSelected(true);
+      console.log(this.selected);
+    });
     this.container.setFunction(this.transFunction);
+    this.setSelected(false);
   }
   createPath(event) {
     var blockCircle = event.target;
@@ -48,14 +52,10 @@ export default class Block {
   }
   setSelected(selected) {
     this.selected = selected;
-
-    if (this.selected)
-      Utils.setSvgElementAttributes(this.container.getRect(), {
-        stroke: "red"
-      });
-    else
-      Utils.setSvgElementAttributes(this.container.getRect(), {
-        stroke: "#000"
-      });
+    this.container.setStrokeColor(selected);
+    console.log(this.container.getRect());
+  }
+  getSelected() {
+    return this.selected;
   }
 }

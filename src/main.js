@@ -23,8 +23,9 @@ mulRect.create(svgElement);
 var block = new Block(200, 200);
 block.create(svgElement);
 block.setTransferFunction("1/t^2-2(2+5t/t)/t");
-block.setSelected(true);
+block.setSelected(false);
 
-svgElement.addEventListener("click", () => {
-  block.setSelected(false);
+svgElement.addEventListener("click", (event) => {
+  if (event.target.tagName == "svg") block.setSelected(false);
+  console.log(event.target.tagName);
 });
