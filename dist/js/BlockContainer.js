@@ -176,7 +176,6 @@ export default class BlockContainer {
     var funcTex = "$$" + math.parse(func).toTex() + "$$";
 
     functionDiv.innerHTML = funcTex;
-    console.log(functionDiv);
     this.textElement.appendChild(functionDiv);
   }
 }

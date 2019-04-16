@@ -29,3 +29,10 @@ foreignObject {
 #function-edit {
   padding-top: 50px;
 }
+#block-btn {
+  color: #00f;
+  border-color: #00f;
+}
+.selected-btn {
+  background-color: rgb(186, 186, 226);
+}

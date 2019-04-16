@@ -17,19 +17,47 @@ var svg = new SVG(constants.SVG_WIDTH, constants.SVG_HEIGHT);
 var svgElement = svg.getElement();
 ///////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
+/********Initializations********/
+var componentType = "no";
+var blockBtn = document.getElementById("block-btn");
+blockBtn.addEventListener("click", () => {
+  componentType = "block";
+  blockBtn.classList.add("selected-btn");
+});
+
+/********Adding Components To SVG********/
+
 // var mulRect = new Multiplier(100, 100, constants.MULTIPLIER_SQUARE_SIDE);
 // mulRect.create(svgElement);
 
-var block1 = new Block(200, 200);
-block1.create(svgElement);
-block1.setTransferFunction("1/t^2-2(2+5t/t)/t");
+// var block1 = new Block(200, 200);
+// block1.create(svgElement);
+// block1.setTransferFunction("1/t^2-2(2+5t/t)/t");
 
-var block2 = new Block(300, 400);
-block2.create(svgElement);
-block2.setTransferFunction("-2(2+5t/t)/t");
+// var block2 = new Block(300, 400);
+// block2.create(svgElement);
+// block2.setTransferFunction("-2(2+5t/t)/t");
 
-svg.addComponent(block1);
-svg.addComponent(block2);
+// svg.addComponent(block1);
+// svg.addComponent(block2);
+
+/********SVG Event Listeners********/
+
+svgElement.addEventListener("click", (event) => {
+  if (event.target.tagName == "svg" && componentType == "block") {
+    event.preventDefault();
+
+    const x = Utils.getMousePosition(event).x;
+    const y = Utils.getMousePosition(event).y;
+
+    svg.deselectAllComponents();
+
+    var newBlock = new Block(x, y);
+    newBlock.create(svgElement);
+
+    svg.addComponent(newBlock);
+  }
+});
 
 /********Components Event Listeners********/
 svg.getComponents().forEach((component) => {
@@ -40,10 +68,4 @@ svg.getComponents().forEach((component) => {
       svg.deselectAllComponents();
       component.setSelected(true);
     });
-});
-
-/********SVG Event Listeners********/
-
-svgElement.addEventListener("click", (event) => {
-  if (event.target.tagName == "svg") svg.deselectAllComponents();
 });
