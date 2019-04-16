@@ -54,7 +54,8 @@ editBtn.addEventListener("click", () => {
 
   for (var i = 0; i < components.length; i++) {
     if (components[i].isSelected()) {
-      components[i].setTransferFunction(functionInput.nodeValue);
+      components[i].setTransferFunction(functionInput.value);
+      startTypeSetting();
       break;
     }
   }
