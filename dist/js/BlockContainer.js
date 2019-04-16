@@ -157,7 +157,6 @@ export default class BlockContainer {
     return this.container;
   }
   setStrokeColor(selected) {
-    console.log(selected);
     if (selected)
       Utils.setSvgElementAttributes(this.rect, {
         stroke: "#00f"

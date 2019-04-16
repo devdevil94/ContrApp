@@ -20,11 +20,10 @@ export default class Block {
       constants.BLOCK_HEIGHT
     );
     this.container.draw(svg);
+    this.container.setFunction(this.transFunction);
     this.container.getRect().addEventListener("click", () => {
       this.setSelected(true);
-      console.log(this.selected);
     });
-    this.container.setFunction(this.transFunction);
     this.setSelected(false);
   }
   createPath(event) {
@@ -53,7 +52,6 @@ export default class Block {
   setSelected(selected) {
     this.selected = selected;
     this.container.setStrokeColor(selected);
-    console.log(this.container.getRect());
   }
   getSelected() {
     return this.selected;

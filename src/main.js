@@ -20,12 +20,17 @@ var svgElement = svg.getElement();
 var mulRect = new Multiplier(100, 100, constants.MULTIPLIER_SQUARE_SIDE);
 mulRect.create(svgElement);
 
-var block = new Block(200, 200);
-block.create(svgElement);
-block.setTransferFunction("1/t^2-2(2+5t/t)/t");
-block.setSelected(false);
+var block1 = new Block(200, 200);
+block1.create(svgElement);
+block1.setTransferFunction("1/t^2-2(2+5t/t)/t");
+
+var block2 = new Block(300, 400);
+block2.create(svgElement);
+block2.setTransferFunction("-2(2+5t/t)/t");
+
+svg.addComponent(block1);
+svg.addComponent(block2);
 
 svgElement.addEventListener("click", (event) => {
-  if (event.target.tagName == "svg") block.setSelected(false);
-  console.log(event.target.tagName);
+  if (event.target.tagName == "svg") svg.deselectAllComponents();
 });
