@@ -6,22 +6,22 @@ export default class Block {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.shape = null;
-
+    this.container = null;
+    this.selected = true;
     this.input = "t";
     this.output = "";
     this.transFunction = "t";
   }
   create(svg) {
-    this.shape = new BlockContainer(
+    this.container = new BlockContainer(
       this.x,
       this.y,
       constants.BLOCK_WIDTH,
       constants.BLOCK_HEIGHT
     );
-    this.shape.draw(svg);
-    console.log(this.shape);
-    this.shape.setFunction(this.transFunction);
+    this.container.draw(svg);
+    console.log(this.container);
+    this.container.setFunction(this.transFunction);
   }
   createPath(event) {
     var blockCircle = event.target;
@@ -44,6 +44,18 @@ export default class Block {
   }
   setTransferFunction(txt) {
     this.transFunction = txt;
-    this.shape.setFunction(this.transFunction);
+    this.container.setFunction(this.transFunction);
+  }
+  setSelected(selected) {
+    this.selected = selected;
+
+    if (this.selected)
+      Utils.setSvgElementAttributes(this.container.getRect(), {
+        stroke: "red"
+      });
+    else
+      Utils.setSvgElementAttributes(this.container.getRect(), {
+        stroke: "#000"
+      });
   }
 }

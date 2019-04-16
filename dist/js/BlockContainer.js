@@ -34,6 +34,7 @@ export default class BlockContainer {
 
     this.container.className.baseVal = "draggable block";
 
+    Utils.setSvgElementAttributes(this.container, { stroke: "#000" });
     this.addEventListeners();
     this.addSelectedCircleEventListener();
 
@@ -125,12 +126,14 @@ export default class BlockContainer {
       this.inOutCircles[circle].setSelected(false);
     }
   }
-
+  getRect() {
+    return this.rect;
+  }
   createRect() {
     Utils.setSvgElementAttributes(this.rect, {
       width: this.w,
       height: this.h,
-      stroke: "#000",
+      // stroke: "#000",
       fill: "#fff"
     });
 
@@ -139,8 +142,8 @@ export default class BlockContainer {
   createText() {
     //Width of the text can be modified based on the number of chars.
     Utils.setSvgElementAttributes(this.textElement, {
-      x: 0.33 * this.w,
-      y: 0.25 * this.h,
+      x: 0,
+      y: 0,
       width: this.w,
       height: this.h
     });
@@ -156,15 +159,15 @@ export default class BlockContainer {
 
   setFunction(func) {
     if (this.textElement.childNodes[0]) {
-      console.log(this.textElement.childNodes[0]);
       this.textElement.removeChild(this.textElement.childNodes[0]);
     }
 
     var functionDiv = document.createElement("div");
+    functionDiv.setAttribute("class", "function-text");
     var funcTex = "$$" + math.parse(func).toTex() + "$$";
 
     functionDiv.innerHTML = funcTex;
+    console.log(functionDiv);
     this.textElement.appendChild(functionDiv);
-    console.log(this.textElement.childNodes[0]);
   }
 }

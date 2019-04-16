@@ -22,15 +22,9 @@ mulRect.create(svgElement);
 
 var block = new Block(200, 200);
 block.create(svgElement);
-block.setTransferFunction("t^2");
+block.setTransferFunction("1/t^2-2(2+5t/t)/t");
+block.setSelected(true);
 
-const eq = math.parse("(t^2)*(t+3)").toTex();
-document.getElementById("hip").innerText = "$$" + eq + "$$";
-
-// var textElement = document.createElementNS(
-//   "http://www.w3.org/2000/svg",
-//   "foreignObject"
-// );
-// Utils.setSvgElementAttributes(textElement, { width: 160, height: 120 });
-// textElement.appendChild(document.getElementById("hip"));
-// svgElement.appendChild(textElement);
+svgElement.addEventListener("click", () => {
+  block.setSelected(false);
+});
