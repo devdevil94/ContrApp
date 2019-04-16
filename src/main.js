@@ -15,6 +15,25 @@ require("../dist/index.html");
 /////////////Important functions/objects to call\\\\\\\\\\\\\\\
 var svg = new SVG(constants.SVG_WIDTH, constants.SVG_HEIGHT);
 var svgElement = svg.getElement();
+
+MathJax.Hub.Config({
+  skipStartupTypeset: true,
+  extensions: ["tex2jax.js", "TeX/AMSmath.js"],
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [["$", "$"]],
+    processEscapes: true
+  }
+});
+
+function startTypeSetting() {
+  var HUB = MathJax.Hub;
+  var functions = document.querySelectorAll(".function-text");
+
+  functions.forEach((func) => {
+    HUB.Queue(["Typeset", HUB, func]);
+  });
+}
 ///////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 /********Initializations********/
@@ -56,6 +75,7 @@ svgElement.addEventListener("click", (event) => {
     newBlock.create(svgElement);
 
     svg.addComponent(newBlock);
+    startTypeSetting();
   }
 });
 
