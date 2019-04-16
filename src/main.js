@@ -17,8 +17,8 @@ var svg = new SVG(constants.SVG_WIDTH, constants.SVG_HEIGHT);
 var svgElement = svg.getElement();
 ///////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-var mulRect = new Multiplier(100, 100, constants.MULTIPLIER_SQUARE_SIDE);
-mulRect.create(svgElement);
+// var mulRect = new Multiplier(100, 100, constants.MULTIPLIER_SQUARE_SIDE);
+// mulRect.create(svgElement);
 
 var block1 = new Block(200, 200);
 block1.create(svgElement);
@@ -30,6 +30,19 @@ block2.setTransferFunction("-2(2+5t/t)/t");
 
 svg.addComponent(block1);
 svg.addComponent(block2);
+
+/********Components Event Listeners********/
+svg.getComponents().forEach((component) => {
+  component
+    .getContainer()
+    .getRect()
+    .addEventListener("click", () => {
+      svg.deselectAllComponents();
+      component.setSelected(true);
+    });
+});
+
+/********SVG Event Listeners********/
 
 svgElement.addEventListener("click", (event) => {
   if (event.target.tagName == "svg") svg.deselectAllComponents();
