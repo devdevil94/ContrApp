@@ -16,15 +16,9 @@ require("../dist/index.html");
 var svg = new SVG(constants.SVG_WIDTH, constants.SVG_HEIGHT);
 var svgElement = svg.getElement();
 
-// MathJax.Hub.Config({
-//   skipStartupTypeset: true,
-//   extensions: ["tex2jax.js", "TeX/AMSmath.js"],
-//   jax: ["input/TeX", "output/HTML-CSS"],
-//   tex2jax: {
-//     inlineMath: [["$", "$"]],
-//     processEscapes: true
-//   }
-// });
+var functionInput = document.getElementById("tFunction-input");
+var editBtn = document.getElementById("edit-Btn");
+var blockBtn = document.getElementById("block-btn");
 
 function startTypeSetting() {
   var HUB = MathJax.Hub;
@@ -40,17 +34,14 @@ function startTypeSetting() {
 
 /********Initializations********/
 var componentType = "no";
-var blockBtn = document.getElementById("block-btn");
+
 blockBtn.addEventListener("click", () => {
   componentType = "block";
   blockBtn.classList.add("selected-btn");
 });
 
-var editBtn = document.getElementById("edit-Btn");
 editBtn.addEventListener("click", () => {
-  var functionInput = document.getElementById("tFunction-input");
   var components = svg.getComponents();
-  var selectedComponent = null;
 
   for (var i = 0; i < components.length; i++) {
     if (components[i].isSelected()) {
@@ -62,20 +53,6 @@ editBtn.addEventListener("click", () => {
 });
 
 /********Adding Components To SVG********/
-
-// var mulRect = new Multiplier(100, 100, constants.MULTIPLIER_SQUARE_SIDE);
-// mulRect.create(svgElement);
-
-// var block1 = new Block(200, 200);
-// block1.create(svgElement);
-// block1.setTransferFunction("1/t^2-2(2+5t/t)/t");
-
-// var block2 = new Block(300, 400);
-// block2.create(svgElement);
-// block2.setTransferFunction("-2(2+5t/t)/t");
-
-// svg.addComponent(block1);
-// svg.addComponent(block2);
 
 /********SVG Event Listeners********/
 
