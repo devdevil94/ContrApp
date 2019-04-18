@@ -1,3 +1,5 @@
+import constants from "./Constants";
+
 export default class Utils {
   static getMousePosition(event) {
     var CTM = svg.getScreenCTM();
@@ -32,20 +34,32 @@ export default class Utils {
 
     offset.x -= transforms.getItem(0).matrix.e;
     offset.y -= transforms.getItem(0).matrix.f;
-
+    // console.log("startDrag offset: ");
+    // console.log(offset);
     return offset;
   }
 
-  static drag(event, offset) {
+  static drag(w, h, event, offset) {
     event.preventDefault();
-
-    var coord = Utils.getMousePosition(event);
 
     var g = event.target.parentNode;
     var transforms = g.transform.baseVal;
     var translate = transforms.getItem(0);
+    // console.log("drag coord: ");
+    // console.log(coord);
+    var coord = Utils.getMousePosition(event);
+    var x = coord.x - offset.x;
+    var y = coord.y - offset.y;
 
-    translate.setTranslate(coord.x - offset.x, coord.y - offset.y);
+    if (x < 0) x = 0;
+    if (y < 0) y = 0;
+
+    if (x + w > constants.SVG_WIDTH) x = constants.SVG_WIDTH - w;
+    if (y + h > constants.SVG_HEIGHT) y = constants.SVG_HEIGHT - h;
+
+    translate.setTranslate(x, y);
+
+    return { x: x, y: y };
   }
 
   static createArrowhead(svg) {
