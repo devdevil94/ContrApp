@@ -42,9 +42,12 @@ export default class Block {
   setInput(input) {
     this.input = input;
   }
-  setTransferFunction(txt) {
+  set TransferFunction(txt) {
     this.transFunction = txt;
     this.container.setFunction(this.transFunction);
+  }
+  get TransferFunction() {
+    return this.transFunction;
   }
   setSelected(selected) {
     this.selected = selected;

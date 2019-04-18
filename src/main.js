@@ -27,30 +27,13 @@ function startTypeSetting() {
   functions.forEach((func) => {
     HUB.Queue(["Typeset", HUB, func]);
     //Maybe resizing can be done after this step
-    console.log(func.offsetWidth + " " + func.offsetHeight);
+    // console.log(func.offsetWidth + " " + func.offsetHeight);
   });
 }
 ///////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 /********Initializations********/
 var componentType = "no";
-
-blockBtn.addEventListener("click", () => {
-  componentType = "block";
-  blockBtn.classList.add("selected-btn");
-});
-
-editBtn.addEventListener("click", () => {
-  var components = svg.getComponents();
-
-  for (var i = 0; i < components.length; i++) {
-    if (components[i].isSelected()) {
-      components[i].setTransferFunction(functionInput.value);
-      startTypeSetting();
-      break;
-    }
-  }
-});
 
 /********Adding Components To SVG********/
 
@@ -74,6 +57,8 @@ svgElement.addEventListener("click", (event) => {
       .addEventListener("click", () => {
         svg.deselectAllComponents();
         newBlock.setSelected(true);
+        console.log(newBlock.TransferFunction);
+        functionInput.value = newBlock.TransferFunction;
       });
 
     svg.addComponent(newBlock);
@@ -81,4 +66,21 @@ svgElement.addEventListener("click", (event) => {
   }
 });
 
-/********Components Event Listeners********/
+/********Settings Event Listeners********/
+
+blockBtn.addEventListener("click", () => {
+  componentType = "block";
+  blockBtn.classList.add("selected-btn");
+});
+
+editBtn.addEventListener("click", () => {
+  var components = svg.getComponents();
+
+  for (var i = 0; i < components.length; i++) {
+    if (components[i].isSelected()) {
+      components[i].TransferFunction = functionInput.value;
+      startTypeSetting();
+      break;
+    }
+  }
+});
