@@ -40,14 +40,14 @@ export default class InOutCircle {
     return this.selected;
   }
 
-  set centerCoord(coord) {
+  set CenterCoord(coord) {
     this.cx = coord.cx;
     this.cy = coord.cy;
   }
-  get centerCoord() {
+  get CenterCoord() {
     return {
-      x: this.cx,
-      y: this.cy
+      cx: this.cx,
+      cy: this.cy
     };
   }
 }
