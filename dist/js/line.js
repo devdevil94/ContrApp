@@ -5,10 +5,10 @@ export default class Line {
   // into a <rect> with a very small hight so it can be selected freely.
 
   constructor(startPoint, endPoint) {
-    this.startX = startPoint.x;
-    this.startY = startPoint.y;
-    this.endX = endPoint.x;
-    this.endY = endPoint.y;
+    this.startX = startPoint.cx;
+    this.startY = startPoint.cy;
+    this.endX = endPoint.cx;
+    this.endY = endPoint.cy;
     this.dragging = false;
     this.point = null;
     this.func = null;
