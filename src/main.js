@@ -16,10 +16,6 @@ require("../dist/index.html");
 var svg = new SVG(constants.SVG_WIDTH, constants.SVG_HEIGHT);
 var svgElement = svg.getElement();
 
-var functionInput = document.getElementById("tFunction-input");
-var editBtn = document.getElementById("edit-Btn");
-var blockBtn = document.getElementById("block-btn");
-
 function startTypeSetting() {
   var HUB = MathJax.Hub;
   var functions = document.querySelectorAll(".function-text");
@@ -34,6 +30,9 @@ function startTypeSetting() {
 
 /********Initializations********/
 var componentType = "no";
+var functionInput = document.getElementById("tFunction-input");
+var editBtn = document.getElementById("edit-Btn");
+var blockBtn = document.getElementById("block-btn");
 
 /********Adding Components To SVG********/
 
@@ -46,18 +45,14 @@ svgElement.addEventListener("click", (event) => {
     const x = Utils.getMousePosition(event).x;
     const y = Utils.getMousePosition(event).y;
 
-    // svg.deselectAllComponents();
-
     var newBlock = new Block(x, y);
     newBlock.create(svgElement);
-
     newBlock
       .getContainer()
       .getRect()
       .addEventListener("click", () => {
         svg.deselectAllComponents();
         newBlock.setSelected(true);
-        console.log(newBlock.TransferFunction);
         functionInput.value = newBlock.TransferFunction;
       });
 

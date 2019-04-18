@@ -31,13 +31,16 @@ export default class Block {
     var svg = blockCircle.parentNode.parentNode;
     var path = new Path(svg, x, y);
   }
-  determineOutput() {
+  calcOutput() {
     var parsedInput = algebra.parse(this.input);
     var parsedTransFunction = algebra.parse(this.transFunction);
     this.output = parsedInput.multiply(parsedTransFunction).toString();
   }
   getOutput() {
     return this.output;
+  }
+  getContainer() {
+    return this.container;
   }
   setInput(input) {
     this.input = input;
@@ -53,9 +56,7 @@ export default class Block {
     this.selected = selected;
     this.container.setStrokeColor(selected);
   }
-  getContainer() {
-    return this.container;
-  }
+
   isSelected() {
     return this.selected;
   }
