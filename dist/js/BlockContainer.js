@@ -58,7 +58,7 @@ export default class BlockContainer {
     this.container.addEventListener("mousemove", (event) => {
       if (this.getDragging()) {
         var coord = Utils.drag(this.w, this.h, event, this.offset);
-        this.setCoord(coord);
+        this.Coord = coord;
       }
     });
     this.container.addEventListener("mouseup", () => {
@@ -71,6 +71,8 @@ export default class BlockContainer {
   set Coord(coord) {
     this.x = coord.x;
     this.y = coord.y;
+    // console.log(coord);
+    this.updateCirclesCoord(coord);
   }
   get Coord() {
     return { x: this.x, y: this.y };
@@ -86,7 +88,24 @@ export default class BlockContainer {
   getInOutCircles() {
     return this.inOutCircles;
   }
-
+  updateCirclesCoord(containerCoord) {
+    this.inOutCircles.top.CenterCoord = {
+      cx: containerCoord.x + this.w / 2,
+      cy: containerCoord.y
+    };
+    this.inOutCircles.bottom.CenterCoord = {
+      cx: containerCoord.x + this.w / 2,
+      cy: containerCoord.y + this.h
+    };
+    this.inOutCircles.left.CenterCoord = {
+      cx: containerCoord.x,
+      cy: containerCoord.y + this.h / 2
+    };
+    this.inOutCircles.right.CenterCoord = {
+      cx: containerCoord.x + this.w,
+      cy: containerCoord.y + this.h / 2
+    };
+  }
   addSelectedCircleEventListener() {
     var top = this.inOutCircles.top;
     var bottom = this.inOutCircles.bottom;
