@@ -13,6 +13,11 @@ export default class SVG {
       component.setSelected(false);
     });
   }
+  deselectAllInOutCircles() {
+    this.components.forEach((component) => {
+      component.deselectCircle();
+    });
+  }
   getComponents() {
     return this.components;
   }
