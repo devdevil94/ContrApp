@@ -3,9 +3,10 @@ import Utils from "./Utils";
 import BlockContainer from "./BlockContainer";
 
 export default class Block {
-  constructor(x, y) {
+  constructor(x, y, id) {
     this.x = x;
     this.y = y;
+    this.id = id;
     this.container = null;
     this.selected = false;
     this.input = "t";
@@ -30,6 +31,9 @@ export default class Block {
     console.log(x + " " + y);
     var svg = blockCircle.parentNode.parentNode;
     var path = new Path(svg, x, y);
+  }
+  getId() {
+    return this.id;
   }
   calcOutput() {
     var parsedInput = algebra.parse(this.input);
@@ -56,8 +60,19 @@ export default class Block {
     this.selected = selected;
     this.container.setStrokeColor(selected);
   }
-
   isSelected() {
     return this.selected;
+  }
+  selectedCircle() {
+    var blockCircles = this.container.getInOutCircles();
+    var selectedCircle = null;
+
+    for (var circle in blockCircles) {
+      if (blockCircles[circle].isSelected()) {
+        selectedCircle = circle;
+        break;
+      }
+    }
+    return selectedCircle;
   }
 }

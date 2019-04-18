@@ -36,7 +36,7 @@ export default class InOutCircle {
     this.selected = selected;
     this.setCircleColor();
   }
-  getSelected() {
+  isSelected() {
     return this.selected;
   }
 
