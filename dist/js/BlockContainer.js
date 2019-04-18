@@ -98,25 +98,25 @@ export default class BlockContainer {
     top.getCircleElement().addEventListener("click", () => {
       this.deselectAllCircles();
       this.getInOutCircles().top.setSelected(
-        !this.getInOutCircles().top.getSelected()
+        !this.getInOutCircles().top.isSelected()
       );
     });
     bottom.getCircleElement().addEventListener("click", () => {
       this.deselectAllCircles();
       this.getInOutCircles().bottom.setSelected(
-        !this.getInOutCircles().bottom.getSelected()
+        !this.getInOutCircles().bottom.isSelected()
       );
     });
     right.getCircleElement().addEventListener("click", () => {
       this.deselectAllCircles();
       this.getInOutCircles().right.setSelected(
-        !this.getInOutCircles().right.getSelected()
+        !this.getInOutCircles().right.isSelected()
       );
     });
     left.getCircleElement().addEventListener("click", () => {
       this.deselectAllCircles();
       this.getInOutCircles().left.setSelected(
-        !this.getInOutCircles().left.getSelected()
+        !this.getInOutCircles().left.isSelected()
       );
     });
   }
