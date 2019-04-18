@@ -72,8 +72,8 @@ export default class BlockContainer {
     this.inOutCircles = {
       top: new InOutCircle(this.w / 2, 0, this.container),
       bottom: new InOutCircle(this.w / 2, this.h, this.container),
-      right: new InOutCircle(0, this.h / 2, this.container),
-      left: new InOutCircle(this.w, this.h / 2, this.container)
+      left: new InOutCircle(0, this.h / 2, this.container),
+      right: new InOutCircle(this.w, this.h / 2, this.container)
     };
   }
   getInOutCircles() {
