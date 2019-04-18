@@ -1,4 +1,4 @@
-import { constants, Utils } from "./Utils";
+import Utils from "./Utils";
 
 export default class Line {
   //TODO: Check if the line can be selected. It might be necessary to chance <line>
