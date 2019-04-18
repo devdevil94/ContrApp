@@ -57,7 +57,8 @@ export default class BlockContainer {
     });
     this.container.addEventListener("mousemove", (event) => {
       if (this.getDragging()) {
-        Utils.drag(event, this.offset);
+        var coord = Utils.drag(this.w, this.h, event, this.offset);
+        this.setCoord(coord.x, coord.y);
       }
     });
     this.container.addEventListener("mouseup", () => {
@@ -67,7 +68,11 @@ export default class BlockContainer {
       this.setDragging(false);
     });
   }
-
+  setCoord(x, y) {
+    this.x = x;
+    this.y = y;
+    console.log(this.x + " " + this.y);
+  }
   createInOutCircles() {
     this.inOutCircles = {
       top: new InOutCircle(this.w / 2, 0, this.container),
