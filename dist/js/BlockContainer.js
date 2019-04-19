@@ -27,7 +27,7 @@ export default class BlockContainer {
     this.createText();
     this.createInOutCircles();
 
-    this.updateCirclesCoord({ x: this.x, y: this.y });
+    this.updateAllCirclesCoord({ x: this.x, y: this.y });
 
     var translate = svg.createSVGTransform();
     translate.setTranslate(this.x, this.y);
@@ -58,8 +58,7 @@ export default class BlockContainer {
     });
     this.container.addEventListener("mousemove", (event) => {
       if (this.getDragging()) {
-        var coord = Utils.drag(this.w, this.h, event, this.offset);
-        this.Coord = coord;
+        this.Coord = Utils.drag(this.w, this.h, event, this.offset);
       }
     });
     this.container.addEventListener("mouseup", () => {
@@ -73,7 +72,7 @@ export default class BlockContainer {
     this.x = coord.x;
     this.y = coord.y;
     // console.log(coord);
-    this.updateCirclesCoord(coord);
+    this.updateAllCirclesCoord(coord);
   }
   get Coord() {
     return { x: this.x, y: this.y };
@@ -89,23 +88,70 @@ export default class BlockContainer {
   getInOutCircles() {
     return this.inOutCircles;
   }
-  updateCirclesCoord(containerCoord) {
-    this.inOutCircles.top.CenterCoord = {
-      cx: containerCoord.x + this.w / 2,
-      cy: containerCoord.y
+  updateAllCirclesCoord(containerCoord) {
+    var top = this.inOutCircles.top;
+    var bottom = this.inOutCircles.bottom;
+    var left = this.inOutCircles.left;
+    var right = this.inOutCircles.right;
+    //NEEDS SOME REFACTORING LATER!!!!!!!!!!!!!!!!!!
+    this.updateCircleCoord(
+      top,
+      containerCoord.x + this.w / 2,
+      containerCoord.y
+    );
+    this.updateCircleCoord(
+      bottom,
+      containerCoord.x + this.w / 2,
+      containerCoord.y + this.h
+    );
+    this.updateCircleCoord(
+      left,
+      containerCoord.x,
+      containerCoord.y + this.h / 2
+    );
+    this.updateCircleCoord(
+      right,
+      containerCoord.x + this.w,
+      containerCoord.y + this.h / 2
+    );
+    // top.CenterCoord = {
+    //   cx: containerCoord.x + this.w / 2,
+    //   cy: containerCoord.y
+    // };
+    // bottom.CenterCoord = {
+    //   cx: containerCoord.x + this.w / 2,
+    //   cy: containerCoord.y + this.h
+    // };
+    // left.CenterCoord = {
+    //   cx: containerCoord.x,
+    //   cy: containerCoord.y + this.h / 2
+    // };
+    // right.CenterCoord = {
+    //   cx: containerCoord.x + this.w,
+    //   cy: containerCoord.y + this.h / 2
+    // };
+  }
+  updateCircleCoord(circle, cx, cy) {
+    console.log(circle.CenterCoord);
+    circle.CenterCoord = {
+      cx: cx,
+      cy: cy
     };
-    this.inOutCircles.bottom.CenterCoord = {
-      cx: containerCoord.x + this.w / 2,
-      cy: containerCoord.y + this.h
-    };
-    this.inOutCircles.left.CenterCoord = {
-      cx: containerCoord.x,
-      cy: containerCoord.y + this.h / 2
-    };
-    this.inOutCircles.right.CenterCoord = {
-      cx: containerCoord.x + this.w,
-      cy: containerCoord.y + this.h / 2
-    };
+    // if (circle.hasConnectingLine()) {
+    //   var line = circle.ConnectingLine;
+    //   console.log(circle);
+    //   if (circle.isEndPoint()) {
+    //     line.endPoint = {
+    //       x: circle.CenterCoord.cx,
+    //       y: circle.CenterCoord.cy
+    //     };
+    //   } else {
+    //     line.startPoint = {
+    //       x: circle.CenterCoord.cx,
+    //       y: circle.CenterCoord.cy
+    //     };
+    //   }
+    // }
   }
   addSelectedCircleEventListener() {
     var top = this.inOutCircles.top;
