@@ -45,8 +45,7 @@ export default class Utils {
     var g = event.target.parentNode;
     var transforms = g.transform.baseVal;
     var translate = transforms.getItem(0);
-    // console.log("drag coord: ");
-    // console.log(coord);
+
     var coord = Utils.getMousePosition(event);
     var x = coord.x - offset.x;
     var y = coord.y - offset.y;

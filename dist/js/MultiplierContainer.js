@@ -98,7 +98,7 @@ export default class MultiplierContainer {
     });
     this.container.addEventListener("mousemove", (event) => {
       if (this.getDragging()) {
-        Utils.drag(this.w, this.h, event, this.offset);
+        this.Coord = Utils.drag(this.s, this.s, event, this.offset);
       }
     });
     this.container.addEventListener("mouseup", () => {
@@ -108,7 +108,15 @@ export default class MultiplierContainer {
       this.setDragging(false);
     });
   }
-
+  set Coord(coord) {
+    this.x = coord.x;
+    this.y = coord.y;
+    console.log(coord);
+    // this.updateAllCirclesCoord(coord);
+  }
+  get Coord() {
+    return { x: this.x, y: this.y };
+  }
   createRect() {
     Utils.setSvgElementAttributes(this.rect, {
       width: this.s,

@@ -5,9 +5,10 @@ import MultiplierContainer from "../MultiplierContainer";
 const cq = require("coffeequate");
 
 export default class Multiplier {
-  constructor(x, y) {
+  constructor(x, y, id) {
     this.x = x;
     this.y = y;
+    this.id = id;
     this.container = null;
     this.input1 = "";
     this.input2 = "";

@@ -116,6 +116,8 @@ svgElement.addEventListener("click", (event) => {
       svg.deselectAllComponents();
       multiplier.setSelected(true);
     });
+
+    svg.addComponent(multiplier);
   }
 });
 
