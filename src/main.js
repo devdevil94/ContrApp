@@ -97,6 +97,28 @@ svgElement.addEventListener("click", (event) => {
   }
 });
 
+svgElement.addEventListener("click", (event) => {
+  if (event.target.tagName == "svg" && componentType == "multiplier") {
+    event.preventDefault();
+
+    const x = Utils.getMousePosition(event).x;
+    const y = Utils.getMousePosition(event).y;
+
+    var multiplier = new Multiplier(
+      x,
+      y,
+      "mul-operator-" + svg.getComponents().length
+    );
+    multiplier.create(svgElement);
+
+    var mulContainer = multiplier.getContainer();
+    mulContainer.getRect().addEventListener("click", () => {
+      svg.deselectAllComponents();
+      multiplier.setSelected(true);
+    });
+  }
+});
+
 /********Settings Event Listeners********/
 
 editBtn.addEventListener("click", () => {
