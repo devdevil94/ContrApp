@@ -33,11 +33,10 @@ function startTypeSetting() {
 var componentType = "no";
 var functionInput = document.getElementById("tFunction-input");
 var editBtn = document.getElementById("edit-Btn");
-var blockBtn = document.getElementById("block-btn");
+var transFuncBlockBtn = document.getElementById("transFunc-block-btn");
+var multiplierBtn = document.getElementById("mul-operator-btn");
 
 /********Adding Components To SVG********/
-
-/********SVG Event Listeners********/
 
 svgElement.addEventListener("click", (event) => {
   if (event.target.tagName == "svg" && componentType == "block") {
@@ -46,7 +45,7 @@ svgElement.addEventListener("click", (event) => {
     const x = Utils.getMousePosition(event).x;
     const y = Utils.getMousePosition(event).y;
 
-    var block = new Block(x, y, "block-" + svg.getComponents().length);
+    var block = new Block(x, y, "tf-block-" + svg.getComponents().length);
     block.create(svgElement);
 
     var blockContainer = block.getContainer();
@@ -57,11 +56,6 @@ svgElement.addEventListener("click", (event) => {
     });
 
     var blockCircles = blockContainer.getInOutCircles();
-
-    // var top = blockCircles["top"];
-    // var bottom = blockCircles["bottom"];
-    // var left = blockCircles["left"];
-    // var right = blockCircles["right"];
 
     const inOutCircles = [
       blockCircles["top"],
@@ -105,11 +99,6 @@ svgElement.addEventListener("click", (event) => {
 
 /********Settings Event Listeners********/
 
-blockBtn.addEventListener("click", () => {
-  componentType = "block";
-  blockBtn.classList.add("selected-btn");
-});
-
 editBtn.addEventListener("click", () => {
   var components = svg.getComponents();
 
@@ -120,4 +109,16 @@ editBtn.addEventListener("click", () => {
       break;
     }
   }
+});
+
+multiplierBtn.addEventListener("click", () => {
+  componentType = "multiplier";
+  transFuncBlockBtn.classList.remove("selected-btn");
+  multiplierBtn.classList.add("selected-btn");
+});
+
+transFuncBlockBtn.addEventListener("click", () => {
+  componentType = "block";
+  multiplierBtn.classList.remove("selected-btn");
+  transFuncBlockBtn.classList.add("selected-btn");
 });
