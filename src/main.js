@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.css";
 
 import SVG from "../dist/js/svg";
 import Block from "../dist/js/Block";
+import Line from "../dist/js/Line";
 import constants from "../dist/js/Constants";
 import Multiplier from "../dist/js/operators/Multiplier";
 import Utils from "../dist/js/Utils";
@@ -57,28 +58,64 @@ svgElement.addEventListener("click", (event) => {
 
     var blockCircles = blockContainer.getInOutCircles();
 
-    for (var circlePos in blockCircles) {
-      //Add click event to all of the circles in the block
-      var circleElement = blockCircles[circlePos].getCircleElement();
-      circleElement.addEventListener("click", () => {
-        //search which block on the canvas has a selected circle
+    // var top = blockCircles["top"];
+    // var bottom = blockCircles["bottom"];
+    // var left = blockCircles["left"];
+    // var right = blockCircles["right"];
+
+    const inOutCircles = [
+      blockCircles["top"],
+      blockCircles["bottom"],
+      blockCircles["left"],
+      blockCircles["right"]
+    ];
+
+    inOutCircles.forEach((circle) => {
+      circle.getCircleElement().addEventListener("click", () => {
         for (var i = 0; i < svg.getComponents().length; i++) {
           var componentOnSvg = svg.getComponents()[i];
+          var selectedCircle = componentOnSvg.getSelectedCircle();
 
-          if (componentOnSvg.getId() != block.getId()) {
-            //When the block is found, determine which circle is it
-            var selectedCircle = componentOnSvg.selectedCircle();
+          if (
+            componentOnSvg.getId() != block.getId() &&
+            selectedCircle != null
+          ) {
+            var startPoint = selectedCircle.CenterCoord;
+            var endPoint = circle.CenterCoord;
 
-            if (selectedCircle != null) {
-              console.log(
-                componentOnSvg.getId() + " " + selectedCircle + " is selected"
-              );
-              break;
-            }
+            svg.deselectAllInOutCircles();
+            var line = new Line(startPoint, endPoint);
+            line.draw(svgElement);
+            break;
           }
         }
       });
-    }
+    });
+
+    //for (var circle in blockCircles) {
+    //Add click event to all of the circles in the block
+    // var circleElement = blockCircles[circle].getCircleElement();
+    // circleElement.addEventListener("click", () => {
+    //   console.log(block.getId() + " " + circle + " is selected");
+    //   //search which block on the canvas has a selected circle
+    //   for (var i = 0; i < svg.getComponents().length; i++) {
+    //     var componentOnSvg = svg.getComponents()[i];
+    //     var selectedCircle = componentOnSvg.getSelectedCircle();
+
+    //     if (componentOnSvg.getId() != block.getId() && selectedCircle != null) {
+    //       //When the block is found, determine which circle is it
+
+    //       var startPoint = selectedCircle.CenterCoord;
+    //       var endPoint = blockCircles[circle].CenterCoord;
+    //       console.log(startPoint + " " + endPoint);
+    //       svg.deselectAllInOutCircles();
+    //       var line = new Line(startPoint, endPoint);
+    //       line.draw(svgElement);
+    //       break;
+    //     }
+    //   }
+    // });
+    //}
     svg.addComponent(block);
     startTypeSetting();
   }

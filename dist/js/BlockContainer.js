@@ -25,8 +25,9 @@ export default class BlockContainer {
   draw(svg) {
     this.createRect();
     this.createText();
-
     this.createInOutCircles();
+
+    this.updateCirclesCoord({ x: this.x, y: this.y });
 
     var translate = svg.createSVGTransform();
     translate.setTranslate(this.x, this.y);
