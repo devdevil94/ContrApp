@@ -29,7 +29,7 @@ foreignObject {
 #function-edit {
   padding-top: 50px;
 }
-#block-btn {
+.section .row .col button {
   color: #00f;
   border-color: #00f;
 }
