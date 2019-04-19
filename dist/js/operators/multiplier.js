@@ -39,4 +39,11 @@ export default class Multiplier {
     var outputExp = cq(this.input1 + "*" + this.input2).toString();
     this.output = outputExp.replace(/\*\*/g, "^");
   }
+  setSelected(selected) {
+    this.selected = selected;
+    this.container.setStrokeColor(selected);
+  }
+  isSelected() {
+    return this.selected;
+  }
 }
