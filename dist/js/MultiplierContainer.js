@@ -54,6 +54,16 @@ export default class MultiplierContainer {
     return this.inOutCircles;
   }
 
+  set Coord(coord) {
+    this.x = coord.x;
+    this.y = coord.y;
+
+    // this.updateAllCirclesCoord(coord);
+  }
+  get Coord() {
+    return { x: this.x, y: this.y };
+  }
+
   addSelectedCircleEventListeners() {
     var bottom = this.inOutCircles.bottom;
     var right = this.inOutCircles.right;
@@ -88,7 +98,7 @@ export default class MultiplierContainer {
     });
     this.container.addEventListener("mousemove", (event) => {
       if (this.getDragging()) {
-        Utils.drag(event, this.offset);
+        Utils.drag(this.w, this.h, event, this.offset);
       }
     });
     this.container.addEventListener("mouseup", () => {
@@ -109,7 +119,9 @@ export default class MultiplierContainer {
 
     this.container.appendChild(this.rect);
   }
-
+  getRect() {
+    return this.rect;
+  }
   createCrossSign() {
     Utils.setSvgElementAttributes(this.line1, {
       x1: 10,
@@ -145,5 +157,15 @@ export default class MultiplierContainer {
   }
   getDragging() {
     return this.dragging;
+  }
+  setStrokeColor(selected) {
+    if (selected)
+      Utils.setSvgElementAttributes(this.rect, {
+        stroke: "#00f"
+      });
+    else
+      Utils.setSvgElementAttributes(this.rect, {
+        stroke: "#000"
+      });
   }
 }
