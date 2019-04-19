@@ -8,18 +8,21 @@ export default class Multiplier {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.shape = null;
+    this.container = null;
     this.input1 = "";
     this.input2 = "";
     this.output = "";
   }
   create() {
-    var shape = new MultiplierContainer(
+    this.container = new MultiplierContainer(
       this.x,
       this.y,
       constants.MULTIPLIER_SQUARE_SIDE
     );
-    shape.draw(svg);
+    this.container.draw(svg);
+  }
+  getContainer() {
+    return this.container;
   }
   setInput1(input1) {
     var input1Exp = input1.replace(/\^/g, "**");
