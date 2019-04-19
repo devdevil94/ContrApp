@@ -116,14 +116,14 @@ export default class BlockContainer {
     );
   }
   updateCircleCoord(circle, cx, cy) {
-    console.log(circle.CenterCoord);
+    // console.log(circle.CenterCoord);
     circle.CenterCoord = {
       cx: cx,
       cy: cy
     };
     if (circle.hasConnectingLine()) {
       var line = circle.ConnectingLine;
-      console.log(circle);
+      // console.log(circle);
       if (circle.IsEndPoint) {
         line.endPoint = {
           x: circle.CenterCoord.cx,
