@@ -114,22 +114,6 @@ export default class BlockContainer {
       containerCoord.x + this.w,
       containerCoord.y + this.h / 2
     );
-    // top.CenterCoord = {
-    //   cx: containerCoord.x + this.w / 2,
-    //   cy: containerCoord.y
-    // };
-    // bottom.CenterCoord = {
-    //   cx: containerCoord.x + this.w / 2,
-    //   cy: containerCoord.y + this.h
-    // };
-    // left.CenterCoord = {
-    //   cx: containerCoord.x,
-    //   cy: containerCoord.y + this.h / 2
-    // };
-    // right.CenterCoord = {
-    //   cx: containerCoord.x + this.w,
-    //   cy: containerCoord.y + this.h / 2
-    // };
   }
   updateCircleCoord(circle, cx, cy) {
     console.log(circle.CenterCoord);
@@ -137,36 +121,27 @@ export default class BlockContainer {
       cx: cx,
       cy: cy
     };
-    // if (circle.hasConnectingLine()) {
-    //   var line = circle.ConnectingLine;
-    //   console.log(circle);
-    //   if (circle.isEndPoint()) {
-    //     line.endPoint = {
-    //       x: circle.CenterCoord.cx,
-    //       y: circle.CenterCoord.cy
-    //     };
-    //   } else {
-    //     line.startPoint = {
-    //       x: circle.CenterCoord.cx,
-    //       y: circle.CenterCoord.cy
-    //     };
-    //   }
-    // }
+    if (circle.hasConnectingLine()) {
+      var line = circle.ConnectingLine;
+      console.log(circle);
+      if (circle.IsEndPoint) {
+        line.endPoint = {
+          x: circle.CenterCoord.cx,
+          y: circle.CenterCoord.cy
+        };
+      } else {
+        line.startPoint = {
+          x: circle.CenterCoord.cx,
+          y: circle.CenterCoord.cy
+        };
+      }
+    }
   }
   addSelectedCircleEventListener() {
     var top = this.inOutCircles.top;
     var bottom = this.inOutCircles.bottom;
     var right = this.inOutCircles.right;
     var left = this.inOutCircles.left;
-
-    // for(var c in this.inOutCircles){
-    // 	var circle = this.inOutCircles[c];
-    // 	console.log(circle);
-    // 	circle.getCircleElement().addEventListener('click', () =>{
-    // 		this.deselectAllCircles();
-    // 		this.getInOutCircles().circle.setSelected(!this.getInOutCircles().circle.getSelected());
-    // 	});
-    // }
 
     top.getCircleElement().addEventListener("click", () => {
       this.deselectAllCircles();
@@ -252,3 +227,29 @@ export default class BlockContainer {
     this.textElement.appendChild(functionDiv);
   }
 }
+
+// top.CenterCoord = {
+//   cx: containerCoord.x + this.w / 2,
+//   cy: containerCoord.y
+// };
+// bottom.CenterCoord = {
+//   cx: containerCoord.x + this.w / 2,
+//   cy: containerCoord.y + this.h
+// };
+// left.CenterCoord = {
+//   cx: containerCoord.x,
+//   cy: containerCoord.y + this.h / 2
+// };
+// right.CenterCoord = {
+//   cx: containerCoord.x + this.w,
+//   cy: containerCoord.y + this.h / 2
+// };
+
+// for(var c in this.inOutCircles){
+// 	var circle = this.inOutCircles[c];
+// 	console.log(circle);
+// 	circle.getCircleElement().addEventListener('click', () =>{
+// 		this.deselectAllCircles();
+// 		this.getInOutCircles().circle.setSelected(!this.getInOutCircles().circle.getSelected());
+// 	});
+// }

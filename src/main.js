@@ -82,40 +82,22 @@ svgElement.addEventListener("click", (event) => {
           ) {
             var startPoint = selectedCircle.CenterCoord;
             var endPoint = circle.CenterCoord;
+            var line = new Line(startPoint, endPoint);
+
+            selectedCircle.IsEndPoint = false;
+            circle.IsEndPoint = true;
+
+            selectedCircle.ConnectingLine = line;
+            circle.ConnectingLine = line;
 
             svg.deselectAllInOutCircles();
-            var line = new Line(startPoint, endPoint);
+
             line.draw(svgElement);
             break;
           }
         }
       });
     });
-
-    //for (var circle in blockCircles) {
-    //Add click event to all of the circles in the block
-    // var circleElement = blockCircles[circle].getCircleElement();
-    // circleElement.addEventListener("click", () => {
-    //   console.log(block.getId() + " " + circle + " is selected");
-    //   //search which block on the canvas has a selected circle
-    //   for (var i = 0; i < svg.getComponents().length; i++) {
-    //     var componentOnSvg = svg.getComponents()[i];
-    //     var selectedCircle = componentOnSvg.getSelectedCircle();
-
-    //     if (componentOnSvg.getId() != block.getId() && selectedCircle != null) {
-    //       //When the block is found, determine which circle is it
-
-    //       var startPoint = selectedCircle.CenterCoord;
-    //       var endPoint = blockCircles[circle].CenterCoord;
-    //       console.log(startPoint + " " + endPoint);
-    //       svg.deselectAllInOutCircles();
-    //       var line = new Line(startPoint, endPoint);
-    //       line.draw(svgElement);
-    //       break;
-    //     }
-    //   }
-    // });
-    //}
     svg.addComponent(block);
     startTypeSetting();
   }

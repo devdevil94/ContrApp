@@ -3,7 +3,9 @@ import constants from "./Constants";
 
 export default class InOutCircle {
   constructor(cx, cy, element) {
+    this.isEndPoint = false;
     this.selected = false;
+    this.connectingLine = null;
     this.cx = cx;
     this.cy = cy;
     this.circle = document.createElementNS(
@@ -21,11 +23,24 @@ export default class InOutCircle {
 
     element.appendChild(this.circle);
   }
-
+  set IsEndPoint(isEndPoint) {
+    this.isEndPoint = isEndPoint;
+  }
+  get IsEndPoint() {
+    return this.isEndPoint;
+  }
   getCircleElement() {
     return this.circle;
   }
-
+  set ConnectingLine(line) {
+    this.connectingLine = line;
+  }
+  get ConnectingLine() {
+    return this.connectingLine;
+  }
+  hasConnectingLine() {
+    return this.connectingLine != null;
+  }
   setCircleColor() {
     if (this.selected)
       Utils.setSvgElementAttributes(this.circle, { fill: "red" });
